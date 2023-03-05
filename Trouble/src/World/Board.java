@@ -2,6 +2,8 @@ package World;
 import Logic.Moves;
 import java.util.Arrays;
 
+import Logic.Moves;
+
 public class Board {
     public final int greenSP = 0;
     public final int blueSP = 7;
