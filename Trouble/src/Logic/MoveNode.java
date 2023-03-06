@@ -24,6 +24,7 @@ public class MoveNode {
     }
 
 
+
     /**
      * @param move Moves object (returned from findMoves)
      * @param board Board object of grandparent, acted on by move.
