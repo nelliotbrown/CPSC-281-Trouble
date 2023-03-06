@@ -5,6 +5,8 @@ import World.Board;
 
 public class Tree {
 
+    //TODO liam says don't make him do any illegal moves, ie killing your own people
+
     private MoveNode rootNode;
     int layers;
 
@@ -16,6 +18,11 @@ public class Tree {
     public Tree( Board initialBoard, int layers) {
         rootNode = new MoveNode(initialBoard);
         this.layers = layers;
+
+        for(int i = 0; i < layers; i++){
+            this.traverseAndAddLayer(rootNode);
+        }
+
     }
 
     /**
@@ -59,19 +66,39 @@ public class Tree {
     }
 
 
-    public void addBottomLayer(){
+    /**
+     * Adds "layers" to bottom of board
+     *
+     * MAY BREAK IF WE MAKE SOME CHILDREN NULL (SPECIFICAlLY ) INDEX
+     *
+     * @param node
+     */
+    public void traverseAndAddLayer(MoveNode node) {
 
-        MoveNode current = rootNode;
+        MoveNode current = node;
 
-        for(int i = 0; i < 2*layers; i++){
+        if (current.getChild(0) != null) {
 
-            for(int j = 0; j < 6; j++){
-
+            for(int i = 0; i < 6; i++){
+                for(int j = 0; j < 4; j++){
+                    current = current.getChild(i).getChild(j);
+                    traverseAndAddLayer(current);
+                }
             }
 
+        } else {
+            addNodes(current);
         }
 
+    }
 
+    /**
+     *
+     *
+     * @param node
+     * @param isAdding true to add score, false to subtract
+     */
+    public void traverseAndUpdate(MoveNode node, boolean isAdding) {
 
 
 

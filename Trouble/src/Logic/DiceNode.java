@@ -2,7 +2,7 @@ package Logic;
 
 import World.Board;
 
-public class DiceNode {
+public class DiceNode extends Node {
 
     private final int diceRoll;
     private int totalScore; // Total score for AI to decide move
