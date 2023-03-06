@@ -2,6 +2,8 @@ package Logic;
 
 public class Moves {
     private int weight;
+    private int startPos;
+    private int endPos;
 
 
     
@@ -13,7 +15,7 @@ public class Moves {
      * @param p the given piece
      * @return
      */
-    public int findMoves(Dice roll, Board b, Piece p){
+    public int findMoves(Dice roll, Board b, Colour c, Home h){
         if(roll != 6 && p.inStart == true)
             this.weight = -1;
 
