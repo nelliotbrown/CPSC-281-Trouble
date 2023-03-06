@@ -174,6 +174,13 @@ public class Tree {
         }
     }
 
+    /**
+     *
+     *
+     * @param node
+     * @param isAdding true to add score, false to subtract
+     */
+    public void traverseAndUpdate(MoveNode node, boolean isAdding) {
 
 
     /**
