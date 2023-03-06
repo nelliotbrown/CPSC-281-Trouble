@@ -8,14 +8,19 @@ public class Moves {
     
     /**
      * finds the weight of a move for a given piece based on a dice roll & the current board 
+     * @param roll from 1-6
+     * @param b the board from it's current state
+     * @param p the given piece
+     * @return
      */
-    public int findMoves(Dice roll, Board b, Piece p, Start s){
-        if(roll == 6 && start != 0){
+    public int findMoves(Dice roll, Board b, Piece p){
+        if(roll != 6 && p.inStart == false)
+            this.weight = -1;
 
 
-        }
+        
 
-        switch (roll, b) {
+        switch (roll, b, p) {
             case value:
                 
                 break;
