@@ -71,6 +71,10 @@ public class Moves {
         return startPos;
     }
 
+    public int getEndPos(){
+        return endPos;
+    }
+
     public static Moves[] findMoves(Board b, int roll){
         return new Moves[5];
     }
