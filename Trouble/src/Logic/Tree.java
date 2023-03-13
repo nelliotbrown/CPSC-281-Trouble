@@ -16,6 +16,7 @@ public class Tree {
      *                     all pieces in home(s).
      */
     public Tree( Board initialBoard, int layers) {
+
         rootNode = new MoveNode(initialBoard);
         this.layers = layers;
 
@@ -31,37 +32,11 @@ public class Tree {
      */
     public void addNodes(MoveNode node) {
 
-        node.makeChildren();
+        node.makeChildren(); // Adds dice Nodes
 
-        // Makes children for dice Nodes and updates scores
-        for(int i = 0; i < 6; i++){
+        for(int i = 0; i < 6; i++){ //Adds move Nodes below the Dice Nodes
             node.getChild(i).makeChildren();
-            node.getChild(i).updateTotalScore();
         }
-
-
-    }
-
-    /**
-     * the ai chooses the moveNode with the highest score,
-     * sets rootNode to
-     *
-     * @param diceRoll
-     */
-    public void aiChooseMove(int diceRoll){
-
-        int moveChoice = 0;
-
-        for(int i = 0; i < 4; i++){
-            if(rootNode.getChild(diceRoll - 1).getChild(i).getScore() > moveChoice){
-                moveChoice = i;
-            }
-        }
-
-        rootNode = rootNode.getChild(diceRoll - 1).getChild(moveChoice);
-        rootNode.setParent(null);
-
-        //TODO add another layer to bottom of tree after this
 
     }
 
@@ -69,7 +44,7 @@ public class Tree {
     /**
      * Adds "layers" to bottom of board
      *
-     * MAY BREAK IF WE MAKE SOME CHILDREN NULL (SPECIFICAlLY ) INDEX
+     * MAY BREAK IF WE MAKE SOME CHILDREN NULL (SPECIFICAlLY 0) INDEX
      *
      * @param node
      */
@@ -96,9 +71,71 @@ public class Tree {
      *
      *
      * @param node
-     * @param isAdding true to add score, false to subtract
+     * @param isAdding true to add score (your own turn), false to subtract
      */
-    public void traverseAndUpdate(MoveNode node, boolean isAdding) {
+    public void traverseAndUpdateWeights(MoveNode node, boolean isAdding) {
+
+        //TODO: Maybe replace isAdding with depth ???
+
+        MoveNode current = node;
+
+        if (current.getChild(0) != null) { //Recursively travel down the tree
+
+            for(int i = 0; i < 6; i++){
+
+                for(int j = 0; j < 4; j++){
+                    current = current.getChild(i).getChild(j);
+                    traverseAndUpdateWeights(current, isAdding);
+                }
+                current.getChild(i).updateWeight(isAdding); //Update the dice Node
+            }
+
+            current.updateWeight(); //Update the move Node
+        }
+    }
+
+
+
+    /**
+     * the ai chooses the moveNode with the highest score,
+     * sets rootNode to
+     *
+     * @param diceRoll
+     */
+    public void aiChooseMove(int diceRoll){
+
+        int moveChoice = 0;
+
+        for(int i = 0; i < 4; i++){
+            if(rootNode.getChild(diceRoll - 1).getChild(i).getWeight() > moveChoice){
+                moveChoice = i;
+            }
+        }
+
+        rootNode = rootNode.getChild(diceRoll - 1).getChild(moveChoice);
+        rootNode.setParent(null);
+
+        traverseAndAddLayer(rootNode);
+        traverseAndUpdateWeights(rootNode, true);
+
+    }
+
+
+    public void playerChooseMove(int diceRoll, int startPos){
+
+        int moveChoice = 0;
+
+        for(int i = 0; i < 4; i++){
+            if(rootNode.getChild(diceRoll - 1).getChild(i).getMoveStartingPos() == startPos){
+                moveChoice = i;
+            }
+        }
+
+        rootNode = rootNode.getChild(diceRoll - 1).getChild(moveChoice);
+        rootNode.setParent(null);
+
+        traverseAndAddLayer(rootNode);
+        traverseAndUpdateWeights(rootNode, true);
 
 
 

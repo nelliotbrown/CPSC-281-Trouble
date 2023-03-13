@@ -1,12 +1,13 @@
 package Logic;
 
+import World.Board;
+
 public class Moves {
+
     private int weight;
     private int startPos;
     private int endPos;
 
-
-    
     
     /**
      * finds the weight of a move for a given piece based on a dice roll & the current board 
@@ -16,6 +17,7 @@ public class Moves {
      * @return
      */
     public int findMoves(Dice roll, Board b, Colour c, Home h){
+
         if(roll != 6 && p.inStart == true)
             this.weight = -1;
 
@@ -59,5 +61,19 @@ public class Moves {
     */
 
 
-    
+    // ~~~~~~~~~~~~~~ Additions I made to get this to work ~~~~~~~~~~~~~
+
+    public int getWeight(){
+        return weight;
+    }
+
+    public int getStartPos(){
+        return startPos;
+    }
+
+    public static Moves[] findMoves(Board b, int roll){
+        return new Moves[5];
+    }
+
+
 }
