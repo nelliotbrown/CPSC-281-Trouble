@@ -3,6 +3,7 @@ import Logic.Moves;
 import java.util.Arrays;
 
 import Logic.Moves;
+import java.util.Arrays;
 
 public class Board {
     public final int greenSP = 0;
@@ -112,5 +113,81 @@ public class Board {
             return redEnd;
         }
 
+        for(int x = 0; x < blueEnd.length; x++){
+            blueEnd[x] = b.getGreenEnd()[x];
+        }
+
+        for(int x = 0; x < redEnd.length; x++){
+            redEnd[x] = b.getGreenEnd()[x];
+        }
+
+        for(int x = 0; x < yellowEnd.length; x++){
+            yellowEnd[x] = b.getGreenEnd()[x];
+        }
+
+        if(m.getWeight() == 1){
+
+        }
+
+        greenHome = b.getGreenHome();
+        blueHome = b.getBlueHome();
+        redHome = b.getRedHome();
+        yellowHome = b.getYellowHome();
+        Pieces temp = board[m.getStartPos()];
+        board[m.getStartPos()] = Pieces.BLACK;
+        board[m.getEndPos()] = temp;
+    }
+
+
+    public Pieces[] getBoard(){
+        return board;
+    }
+
+    public int getGreenHome(){
+        return greenHome;
+    }
+
+    public int getBlueHome(){
+        return blueHome;
+    }
+
+    public int getYellowHome(){
+        return yellowHome;
+    }
+
+    public int getRedHome(){
+        return redHome;
+    }
+
+    public int getGreenSP(){
+        return greenSP;
+    }
+
+    public int getBlueSP(){
+        return blueSP;
+    }
+
+    public int getYellowSP(){
+        return yellowSP;
+    }
+
+    public int getRedSP(){
+        return redSP;
+    }
+
+    public Pieces[] getGreenEnd() {
+        return greenEnd;
+    }
+
+    public Pieces[] getBlueEnd() {
+        return blueEnd;
+    }
+
+    public Pieces[] getRedEnd() {
+        return redEnd;
+    }
+
+    public Pieces[] getYellowEnd() {
+        return yellowEnd;
     }
 }
