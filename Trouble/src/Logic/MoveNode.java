@@ -4,8 +4,9 @@ import World.Board;
 
 public class MoveNode {
 
-    private Board board; // Node's copy of the board
-    private int score; // Score from Move object
+    private final Board board; // Node's copy of the board
+    private final Moves moves;
+    private int weight; // Score from Move object
 
     private DiceNode[] children;
     private DiceNode parent;
@@ -19,7 +20,8 @@ public class MoveNode {
      */
     public MoveNode(Board board) {
         this.board = board;
-        this.score = 0;
+        this.moves = null;
+        this.weight = 0;
         children = new DiceNode[6];
     }
 
@@ -30,8 +32,9 @@ public class MoveNode {
      * @param board Board object of grandparent, acted on by move.
      */
     public MoveNode(Moves move, Board board, DiceNode parent) {
+        this.moves = move;
         this.board = board.moveBoard(move);
-        this.score = move.getScore();
+        this.weight = move.getWeight();
         this.parent = parent;
         children = new DiceNode[6];
     }
@@ -48,16 +51,33 @@ public class MoveNode {
     }
 
 
-    // ~~~~~ Setters and Getters ~~~~~
+    /**
+     * Updates weight of Node. Sets weight to the average of Dice Node weights since
+     * it is probabilistic.
+     *
+     */
+    public void updateWeight(){
 
-    public int getScore(){
-        return score;
+        int newWeight = 0;
+
+        for (DiceNode child : children) {
+            newWeight += child.getWeight();
+        }
+
+        weight = newWeight/children.length;
     }
 
+
+    // ~~~~~ Setters and Getters ~~~~~
+
+    public int getWeight(){
+        return weight;
+    }
 
     public Board getBoard() {
         return board;
     }
+
 
     public void setParent(DiceNode parent) {
         this.parent = parent;
@@ -71,6 +91,10 @@ public class MoveNode {
      */
     public DiceNode getChild(int i){
         return children[i];
+    }
+
+    public int getMoveStartingPos(){
+        return this.moves.getStartPos();
     }
 
 

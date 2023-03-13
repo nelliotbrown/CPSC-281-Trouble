@@ -1,11 +1,9 @@
 package Logic;
 
-import World.Board;
-
-public class DiceNode extends Node {
+public class DiceNode{
 
     private final int diceRoll;
-    private int totalScore; // Total score for AI to decide move
+    private int weight; // Total score for AI to decide move
     private MoveNode[] children;
     public MoveNode parent;
 
@@ -34,14 +32,24 @@ public class DiceNode extends Node {
         }
     }
 
+    /**
+     * Updates weight of dice node. Weight is set to max (or min) of the children Nodes
+     *
+     * @param isAdding if true adds weight to dice Node, else subtracts
+     */
+    public void updateWeight(boolean isAdding) {
 
-    public void updateTotalScore() {
+        weight = children[0].getWeight();
 
-        totalScore = 0;
+        for (MoveNode child : children) {
 
-        for(int i = 0; i < 6; i++){
-            totalScore += children[i].getScore();
+            if (isAdding) {
+                weight = Math.max(weight, child.getWeight());
+            } else {
+                weight = Math.min(weight, child.getWeight());
+            }
         }
+
     }
 
 
@@ -55,6 +63,11 @@ public class DiceNode extends Node {
      */
     public MoveNode getChild(int i){
         return children[i];
+    }
+
+
+    public int getWeight(){
+        return weight;
     }
 
 
