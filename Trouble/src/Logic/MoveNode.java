@@ -4,8 +4,9 @@ import World.Board;
 
 public class MoveNode {
 
-    private Board board; // Node's copy of the board
-    private int score; // Score from Move object
+    private final Board board; // Node's copy of the board
+    private final Moves moves;
+    private int weight; // Score from Move object
 
     private DiceNode[] children;
     private DiceNode parent;
@@ -75,6 +76,7 @@ public class MoveNode {
     public Board getBoard() {
         return board;
     }
+
 
     public void setParent(DiceNode parent) {
         this.parent = parent;
