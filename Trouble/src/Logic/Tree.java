@@ -7,13 +7,16 @@ public class Tree {
 
     //TODO liam says don't make him do any illegal moves, ie killing your own people
 
+    //TODO if truncating the tree add a boolean to moveNode
+
     private MoveNode rootNode;
-    int layers;
+    private int layers;
 
     /**
      *
      * @param initialBoard A Board object set to the initial starting position,
      *                     all pieces in home(s).
+     * @param layers Number of layers the tree will have.
      */
     public Tree( Board initialBoard, int layers) {
 
@@ -28,7 +31,9 @@ public class Tree {
 
     /**
      * Adds a layer of dice Nodes and move Nodes below node,
-     * for one players turn
+     * for one player's turn
+     *
+     * @param node Node that layers are added to
      */
     public void addNodes(MoveNode node) {
         node.makeChildren(); // Adds dice Nodes
@@ -41,6 +46,13 @@ public class Tree {
 
     }
 
+    /**
+     * Adds layers to the botoom of the tra
+     */
+    private void traverseAndAddLayer(){
+        traverseAndAddLayer(rootNode);
+    }
+
 
     /**
      * Adds "layers" to bottom of board
@@ -49,7 +61,7 @@ public class Tree {
      *
      * @param node
      */
-    public void traverseAndAddLayer(MoveNode node) {
+    private void traverseAndAddLayer(MoveNode node) {
 
         MoveNode current = node;
 
@@ -83,7 +95,6 @@ public class Tree {
         if (current.getChild(0) != null) { //Recursively travel down the tree
 
             for(int i = 0; i < 6; i++){
-
                 for(int j = 0; j < 4; j++){
                     current = current.getChild(i).getChild(j);
                     traverseAndUpdateWeights(current, isAdding);
@@ -182,6 +193,12 @@ public class Tree {
     }
 
 
+    /**
+     *
+     *
+     * @param diceRoll
+     * @param startPos
+     */
     public void playerChooseMove(int diceRoll, int startPos) {
         int moveChoice = 0;
 

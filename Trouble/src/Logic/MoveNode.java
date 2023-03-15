@@ -12,7 +12,6 @@ public class MoveNode {
     private DiceNode parent;
 
 
-
     /**
      * Used for intializing tree
      *
@@ -33,7 +32,7 @@ public class MoveNode {
      */
     public MoveNode(Moves move, Board board, DiceNode parent) {
         this.moves = move;
-        this.board = board.moveBoard(move);
+        this.board = new Board(board, move);
         this.weight = move.getWeight();
         this.parent = parent;
         children = new DiceNode[6];
@@ -77,7 +76,6 @@ public class MoveNode {
     public Board getBoard() {
         return board;
     }
-
 
     public void setParent(DiceNode parent) {
         this.parent = parent;
