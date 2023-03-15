@@ -18,13 +18,13 @@ public class Moves {
      */
     public int findMoves(Dice roll, Board b, Colour c, Home h){
 
-        if(roll != 6 && p.inStart == true)
+        if(roll != 6 && c.inStart == true)
             this.weight = -1;
 
 
         
-        if(p.inStart == false){
-            switch (roll, b, p) {
+        if(c.inStart == false){
+            switch (roll, b, c) {
                 case roll == 1:
                     break;
 
