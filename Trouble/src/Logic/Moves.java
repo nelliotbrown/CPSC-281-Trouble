@@ -18,13 +18,13 @@ public class Moves {
      */
     public int findMoves(Dice roll, Board b, Colour c, Home h){
 
-        if(roll != 6 && p.inStart == true)
+        if(roll != 6 && c.inStart == true)
             this.weight = -1;
 
 
         
         if(p.inStart == false){
-            switch (roll, b, p) {
+            switch (roll, b, c) {
                 case roll == 1:
                     break;
 
@@ -71,13 +71,6 @@ public class Moves {
         return startPos;
     }
 
-<<<<<<< HEAD
-    public int getEndPos(){
-        return endPos;
-    }
-
-=======
->>>>>>> 7853f5f (added dice and move nodes and a bit to tree)
     public static Moves[] findMoves(Board b, int roll){
         return new Moves[5];
     }
