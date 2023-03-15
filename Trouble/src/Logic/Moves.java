@@ -5,7 +5,7 @@ import World.*;
 public class Moves {
 
     private int weight;
-    private int roll;
+    private final int roll;
     private Pieces[] boardstate;
     private Pieces colour;
     private Board board;
@@ -38,22 +38,22 @@ public class Moves {
         
         if(!(inStart())){
             switch (roll) {
-                case roll == 1:
+                case roll = 1:
                     break;
 
-                case roll == 2:
+                case roll = 2:
                     break;
                 
-                case roll == 3:
+                case roll = 3:
                     break;
                     
-                case roll == 4:
+                case roll = 4:
                     break;
                 
-                case roll == 5:
+                case roll = 5:
                     break;
                 
-                case roll == 6:
+                case roll = 6:
                     break;    
             }
         }else{
@@ -87,8 +87,7 @@ public class Moves {
     }
 
     public boolean inStart(){
-        
-        return(findMoves(board, roll) == board.getSP(colour) );
+        return(findMoves(board, roll) == board.getSP(colour));
     }
 
 
