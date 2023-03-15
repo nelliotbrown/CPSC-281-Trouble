@@ -5,6 +5,7 @@ public enum Pieces{
 RED,
 GREEN, 
 BLUE, 
-YELLOW    
+YELLOW,
+BLACK
 
 }
