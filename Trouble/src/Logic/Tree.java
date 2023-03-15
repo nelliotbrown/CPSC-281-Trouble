@@ -224,6 +224,12 @@ public class Tree {
     }
 
 
+    /**
+     *
+     *
+     * @param diceRoll
+     * @param startPos
+     */
     public void playerChooseMove(int diceRoll, int startPos) {
         int moveChoice = 0;
 

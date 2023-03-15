@@ -77,7 +77,6 @@ public class MoveNode {
         return board;
     }
 
-
     public void setParent(DiceNode parent) {
         this.parent = parent;
     }
