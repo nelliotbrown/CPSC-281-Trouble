@@ -19,7 +19,6 @@ public class Tree {
      * @param layers Number of layers the tree will have.
      */
     public Tree( Board initialBoard, int layers) {
-
         rootNode = new MoveNode(initialBoard);
         this.layers = layers;
 
@@ -43,7 +42,6 @@ public class Tree {
         for(int i = 0; i < 6; i++){ //Adds move Nodes below the Dice Nodes
             node.getChild(i).makeChildren();
         }
-
     }
 
     /**
@@ -210,7 +208,6 @@ public class Tree {
      * @param diceRoll
      */
     public void aiChooseMove(int diceRoll){
-
         int moveChoice = 0;
 
         for(int i = 0; i < 4; i++){
@@ -224,16 +221,14 @@ public class Tree {
 
         traverseAndAddLayer(rootNode);
         traverseAndUpdateWeights(rootNode, true);
-
     }
 
 
-    public void playerChooseMove(int diceRoll, int startPos){
-
+    public void playerChooseMove(int diceRoll, int startPos) {
         int moveChoice = 0;
 
-        for(int i = 0; i < 4; i++){
-            if(rootNode.getChild(diceRoll - 1).getChild(i).getMoveStartingPos() == startPos){
+        for (int i = 0; i < 4; i++) {
+            if (rootNode.getChild(diceRoll - 1).getChild(i).getMoveStartingPos() == startPos) {
                 moveChoice = i;
             }
         }
