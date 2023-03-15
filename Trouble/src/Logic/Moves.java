@@ -71,10 +71,13 @@ public class Moves {
         return startPos;
     }
 
+<<<<<<< HEAD
     public int getEndPos(){
         return endPos;
     }
 
+=======
+>>>>>>> 7853f5f (added dice and move nodes and a bit to tree)
     public static Moves[] findMoves(Board b, int roll){
         return new Moves[5];
     }
