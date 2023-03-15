@@ -33,18 +33,12 @@ public class Tree {
     public void addNodes(MoveNode node) {
         node.makeChildren(); // Adds dice Nodes
 
-<<<<<<< HEAD
-        for(int i = 0; i < 6; i++){ //Adds move Nodes below the Dice Nodes
-            node.getChild(i).makeChildren();
-        }
-=======
         node.makeChildren(); // Adds dice Nodes
 
         for(int i = 0; i < 6; i++){ //Adds move Nodes below the Dice Nodes
             node.getChild(i).makeChildren();
         }
 
->>>>>>> 7853f5f (added dice and move nodes and a bit to tree)
     }
 
 
@@ -81,8 +75,6 @@ public class Tree {
      * @param isAdding true to add score (your own turn), false to subtract
      */
     public void traverseAndUpdateWeights(MoveNode node, boolean isAdding) {
-<<<<<<< HEAD
-=======
 
         //TODO: Maybe replace isAdding with depth ???
 
@@ -145,7 +137,6 @@ public class Tree {
 
         traverseAndAddLayer(rootNode);
         traverseAndUpdateWeights(rootNode, true);
->>>>>>> 7853f5f (added dice and move nodes and a bit to tree)
 
         //TODO: Maybe replace isAdding with depth ???
 

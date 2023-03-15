@@ -1,12 +1,24 @@
 package Logic;
 
-import World.Board;
+import World.*;
 
 public class Moves {
 
     private int weight;
-    private int startPos;
-    private int endPos;
+    private int roll;
+    private Pieces[] boardstate;
+    private Pieces colour;
+    private Board board;
+    
+    
+
+    public Moves(Board b, int r, Pieces c){
+        this.board = b;
+        this.boardstate = b.getBoard();
+        this.roll = r;
+        this.colour = c;
+        
+    }
 
     
     /**
@@ -16,15 +28,16 @@ public class Moves {
      * @param p the given piece
      * @return
      */
-    public int findMoves(Dice roll, Board b, Colour c, Home h){
+    public int findMoves(){
 
-        if(roll != 6 && c.inStart == true)
+        if(roll != 6 && inStart())
             this.weight = -1;
+        //assigns a negative weight to trying to leave the start when anything but a 6 is not rolled
 
 
         
-        if(p.inStart == false){
-            switch (roll, b, c) {
+        if(!(inStart())){
+            switch (roll) {
                 case roll == 1:
                     break;
 
@@ -67,12 +80,15 @@ public class Moves {
         return weight;
     }
 
-    public int getStartPos(){
-        return startPos;
-    }
+
 
     public static Moves[] findMoves(Board b, int roll){
         return new Moves[5];
+    }
+
+    public boolean inStart(){
+        
+        return(findMoves(board, roll) == board.getSP(colour) );
     }
 
 
