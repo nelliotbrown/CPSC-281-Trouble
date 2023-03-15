@@ -2,6 +2,8 @@ package Logic;
 
 import World.Board;
 
+// Green, Blue, Red, Yellow
+
 
 public class Tree {
 
@@ -14,12 +16,11 @@ public class Tree {
 
     /**
      *
-     * @param initialBoard A Board object set to the initial starting position,
-     *                     all pieces in home(s).
      * @param layers Number of layers the tree will have.
      */
-    public Tree( Board initialBoard, int layers) {
-        rootNode = new MoveNode(initialBoard);
+    public Tree(int layers) {
+
+        rootNode = new MoveNode(new Board());
         this.layers = layers;
 
         for(int i = 0; i < layers; i++){

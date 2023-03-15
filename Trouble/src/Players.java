@@ -4,7 +4,6 @@ public class Players {
     private Random rand = new Random();
 
     public Players(){
-
     }
 
     public int rollDice(){
