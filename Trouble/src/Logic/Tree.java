@@ -53,6 +53,13 @@ public class Tree {
         traverseAndAddLayer(rootNode);
     }
 
+    /**
+     * Adds layers to the botoom of the tra
+     */
+    private void traverseAndAddLayer(){
+        traverseAndAddLayer(rootNode);
+    }
+
 
     /**
      * Adds "layers" to bottom of board
@@ -95,7 +102,6 @@ public class Tree {
         if (current.getChild(0) != null) { //Recursively travel down the tree
 
             for(int i = 0; i < 6; i++){
-
                 for(int j = 0; j < 4; j++){
                     current = current.getChild(i).getChild(j);
                     traverseAndUpdateWeights(current, isAdding);
