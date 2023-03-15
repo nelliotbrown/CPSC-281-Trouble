@@ -95,6 +95,68 @@ public class Tree {
         if (current.getChild(0) != null) { //Recursively travel down the tree
 
             for(int i = 0; i < 6; i++){
+
+                for(int j = 0; j < 4; j++){
+                    current = current.getChild(i).getChild(j);
+                    traverseAndUpdateWeights(current, isAdding);
+                }
+                current.getChild(i).updateWeight(isAdding); //Update the dice Node
+            }
+
+            current.updateWeight(); //Update the move Node
+        }
+    }
+
+
+
+    /**
+     * the ai chooses the moveNode with the highest score,
+     * sets rootNode to
+     *
+     * @param diceRoll
+     */
+    public void aiChooseMove(int diceRoll){
+
+        int moveChoice = 0;
+
+        for(int i = 0; i < 4; i++){
+            if(rootNode.getChild(diceRoll - 1).getChild(i).getWeight() > moveChoice){
+                moveChoice = i;
+            }
+        }
+
+        rootNode = rootNode.getChild(diceRoll - 1).getChild(moveChoice);
+        rootNode.setParent(null);
+
+        traverseAndAddLayer(rootNode);
+        traverseAndUpdateWeights(rootNode, true);
+
+    }
+
+
+    public void playerChooseMove(int diceRoll, int startPos){
+
+        int moveChoice = 0;
+
+        for(int i = 0; i < 4; i++){
+            if(rootNode.getChild(diceRoll - 1).getChild(i).getMoveStartingPos() == startPos){
+                moveChoice = i;
+            }
+        }
+
+        rootNode = rootNode.getChild(diceRoll - 1).getChild(moveChoice);
+        rootNode.setParent(null);
+
+        traverseAndAddLayer(rootNode);
+        traverseAndUpdateWeights(rootNode, true);
+
+        //TODO: Maybe replace isAdding with depth ???
+
+        MoveNode current = node;
+
+        if (current.getChild(0) != null) { //Recursively travel down the tree
+
+            for(int i = 0; i < 6; i++){
                 for(int j = 0; j < 4; j++){
                     current = current.getChild(i).getChild(j);
                     traverseAndUpdateWeights(current, isAdding);

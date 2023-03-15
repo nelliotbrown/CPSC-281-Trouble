@@ -123,10 +123,10 @@ public class Moves {
     public int getStartPos(){
         return startPos;
     }
+
     public int getEndPos(){
         return endPos;
     }
-
 
 
     public static Moves[] findMoves(Board b, int roll){
