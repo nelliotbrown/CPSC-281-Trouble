@@ -120,9 +120,7 @@ public class Moves {
         return weight;
     }
 
-    public int getStartPos(){
-        return startPos;
-    }
+
 
     public int getEndPos(){
         return endPos;
