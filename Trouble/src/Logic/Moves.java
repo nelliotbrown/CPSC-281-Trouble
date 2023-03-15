@@ -137,29 +137,14 @@ public class Moves {
     public int getStartPos(){
         return this.startPos;
     }
+
     public int getEndPos(){
         return this.endPos;
     }
 
 
-    public void setStartPos(int startPos){
-        this.startPos = startPos;
-    }
-
-    public static Moves[] findMoves(Board b, int roll, Pieces c) {
-        Moves[] array = new Moves[4];
-        Pieces[] board = b.getBoard();
-        int y = 0;
-        for (int x = 0; x < board.length; x++) {
-            if (board[x] == c) {
-                array[y] = new Moves(b, roll, c);
-                array[y].setStartPos(x);
-                array[y].setEndPos((x + roll) % 28);
-                array[y].updateWeight();
-                y++;
-            }
-        }
-    return array;
+    public static Moves[] findMoves(Board b, int roll){
+        return new Moves[5];
     }
 
     public boolean inHome(){
