@@ -1,12 +1,16 @@
 package Logic;
 
 import World.Board;
+import World.Pieces;
+
 
 public class MoveNode {
 
     private final Board board; // Node's copy of the board
     private final Moves moves;
+    private final Pieces color;
     private int weight; // Score from Move object
+
 
     private DiceNode[] children;
     private DiceNode parent;
@@ -21,6 +25,8 @@ public class MoveNode {
         this.board = board;
         this.moves = null;
         this.weight = 0;
+        this.parent = null;
+        this.color = Pieces.GREEN;
         children = new DiceNode[6];
     }
 
@@ -34,6 +40,7 @@ public class MoveNode {
         this.board = new Board(board, move);
         this.weight = move.getWeight();
         this.parent = parent;
+        this.color = parent.getColor();
         children = new DiceNode[6];
     }
 
@@ -92,6 +99,10 @@ public class MoveNode {
 
     public int getMoveStartingPos(){
         return this.moves.getStartPos();
+    }
+
+    public Pieces getColor(){
+        return this.color;
     }
 
 
