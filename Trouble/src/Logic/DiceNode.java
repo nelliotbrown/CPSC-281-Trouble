@@ -78,6 +78,27 @@ public class DiceNode{
         }
     }
 
+    /**
+     *
+     */
+    private static Pieces nextColor(Pieces color){
+
+        if (color == Pieces.GREEN){
+            return Pieces.BLUE;
+        } else if (color == Pieces.BLUE){
+            return Pieces.RED;
+        } else if (color == Pieces.RED){
+            return Pieces.YELLOW;
+        } else if (color == Pieces.YELLOW){
+            return Pieces.GREEN;
+        } else {
+            //TODO delete this after bug fixing
+            System.out.println("THAT COLOR DOESN'T EXIST HOMIE");
+        }
+
+        return Pieces.BLACK;
+    }
+
 
     // ~~~~~ Setters and Getters ~~~~~
 
