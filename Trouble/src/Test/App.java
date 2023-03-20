@@ -1,11 +1,18 @@
 package Test;
 import java.sql.SQLOutput;
 import java.util.Scanner;
+import Logic.Tree;
 
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         boolean gameState = false;
+
+        Players green = new Players(false);
+        Players blue = new Players(false);
+        Players red = new Players(false);
+        Players yellow = new Players(false);
+
         System.out.println("Hello, World!");
         String answer = "temp";
 
@@ -13,9 +20,9 @@ public class App {
             System.out.println("Do you want Green to be Player or AI? 'y' for Yes, 'n' for No.");
             answer = scanner.nextLine();
             if (answer.equals("y")) {
-                Players green = new Players(true);
+                green.setHuman(true);
             } else if (answer.equals("n")) {
-                Players green = new Players(false);
+                green.setHuman(false);
             } else {
                 System.out.println("not valid response.");
             }
@@ -27,9 +34,9 @@ public class App {
             System.out.println("Do you want Blue to be Player or AI? 'y' for Yes, 'n' for No.");
             answer = scanner.nextLine();
             if (answer.equals("y")) {
-                Players Blue = new Players(true);
+                blue.setHuman(true);
             } else if (answer.equals("n")) {
-                Players Blue = new Players(false);
+                blue.setHuman(false);
             } else {
                 System.out.println("not valid response.");
             }
@@ -41,10 +48,10 @@ public class App {
             System.out.println("Do you want Red to be Player or AI? 'y' for Yes, 'n' for No.");
             answer = scanner.nextLine();
             if (answer.equals("y")) {
-                Players Red = new Players(true);
+                red.setHuman(true);
 
             } else if (answer.equals("n")) {
-                Players Red = new Players(false);
+                red.setHuman(false);
             } else {
                 System.out.println("not valid response.");
             }
@@ -55,9 +62,9 @@ public class App {
             System.out.println("Do you want Yellow to be Player or AI? 'y' for Player, 'n' for AI.");
             answer = scanner.nextLine();
             if (answer.equals("y")) {
-                Players Yellow = new Players(true);
+                yellow.setHuman(true);
             } else if (answer.equals("n")) {
-                Players Yellow = new Players(false);
+                yellow.setHuman(false);
             } else {
                 System.out.println("not valid response.");
             }
@@ -66,7 +73,10 @@ public class App {
         gameState = true;
 
         while(gameState){
-
+            green.makeMove();
+            blue.makeMove();
+            red.makeMove();
+            yellow.makeMove();
         }
 
     }
