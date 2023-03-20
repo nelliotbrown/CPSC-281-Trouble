@@ -30,10 +30,11 @@ public class Board {
         Arrays.fill(yellowEnd, Pieces.BLACK);
     }
 
-    public Board(Board b,Moves m){
+    public Board(Board b, Moves m){
         for(int x = 0; x < board.length; x++){
             board[x] = b.getBoard()[x];
         }
+
         greenHome = b.getHome(Pieces.GREEN);
         blueHome = b.getHome(Pieces.BLUE);
         redHome = b.getHome(Pieces.RED);
