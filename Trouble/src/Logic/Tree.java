@@ -1,9 +1,7 @@
 package Logic;
 
 import World.Board;
-
-// Green, Blue, Red, Yellow
-
+import World.Pieces;
 
 public class Tree {
 

@@ -1,8 +1,11 @@
 package Logic;
 
+import World.Pieces;
+
 public class DiceNode{
 
     private final int diceRoll;
+    private final Pieces color;
     private int weight; // Total score for AI to decide move
     private MoveNode[] children;
     public MoveNode parent;
@@ -15,6 +18,7 @@ public class DiceNode{
     public DiceNode(int diceRoll, MoveNode parent){
         this.diceRoll = diceRoll;
         this.parent = parent;
+        this.color = nextColor(parent.getColor());
     }
 
 
@@ -52,6 +56,27 @@ public class DiceNode{
 
     }
 
+    /**
+     *
+     */
+    private static Pieces nextColor(Pieces color){
+
+        if (color == Pieces.GREEN){
+            return Pieces.BLUE;
+        } else if (color == Pieces.BLUE){
+            return Pieces.RED;
+        } else if (color == Pieces.RED){
+            return Pieces.YELLOW;
+        } else if (color == Pieces.YELLOW){
+            return Pieces.GREEN;
+        } else {
+            //TODO delete this after bug fixing
+            System.out.println("THAT COLOR DOESN'T EXIST HOMIE");
+        }
+
+        return Pieces.BLACK;
+    }
+
 
     // ~~~~~ Setters and Getters ~~~~~
 
@@ -68,6 +93,10 @@ public class DiceNode{
 
     public int getWeight(){
         return weight;
+    }
+
+    public Pieces getColor(){
+        return color;
     }
 
 
