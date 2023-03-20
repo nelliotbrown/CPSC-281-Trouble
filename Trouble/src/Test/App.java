@@ -1,5 +1,6 @@
 package Test;
 import java.util.Scanner;
+import Logic.Tree;
 
 import Logic.MoveNode;
 import Logic.Tree;
