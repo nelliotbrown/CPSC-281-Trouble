@@ -147,6 +147,10 @@ public class Tree {
         traverseAndAddLayer(rootNode);
         traverseAndUpdateWeights(rootNode, true);
     }
+
+    public MoveNode getRootNode(){
+        return rootNode;
+    }
 }
 
 
