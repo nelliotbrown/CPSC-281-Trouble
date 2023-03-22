@@ -185,7 +185,7 @@ public class Moves {
             if (board[x] == c) {
                 array[y] = new Moves(b, roll, c);
                 array[y].setStartPos(x);
-                array[y].setEndPos(x + roll % 28);
+                array[y].setEndPos( (x + roll) % 28);
                 array[y].updateWeight();
                 y++;
             }
