@@ -1,3 +1,4 @@
+
 package World;
 import Logic.Moves;
 import java.util.Arrays;
@@ -95,8 +96,28 @@ public class Board {
         }
 
         else if(m.getWeight() == 2){
-
+            Pieces temp = board[m.getEndPos()];
+            board[m.getEndPos()] = board[m.getStartPos()];
+            board[m.getStartPos()] = Pieces.BLACK;
+            if(temp == Pieces.GREEN){
+                greenHome++;
+            }
+            else if(temp == Pieces.BLUE){
+                blueHome++;
+            }
+            else if(temp == Pieces.RED){
+                redHome++;
+            }
+            else if(temp == Pieces.YELLOW){
+                yellowHome++;
+            }
         }
+
+        else if(m.getWeight() == 4 || m.getWeight() == 1){
+            board[m.getEndPos()] = board[m.getStartPos()];
+            board[m.getStartPos()] = Pieces.BLACK;
+       }
+
 
     }
 
