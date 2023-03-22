@@ -120,6 +120,10 @@ public class Moves {
         return weight;
     }
 
+    public void setWeight(int c){
+        this.weight = c;
+    }
+
     public int getStartPos(){
         return this.startPos;
     }
@@ -160,7 +164,7 @@ public class Moves {
         for (int i = 0; i < piecesInStart; i++){
             array[y] = new Moves(b, roll, c);
             array[y].setStartPos(z);
-            array[y].setEndPos(roll);
+            array[y].setEndPos(b.getSP(c));
             array[y].updateWeight();
             y++;
         }
@@ -174,6 +178,15 @@ public class Moves {
                 y++;
             }
         }
+
+        for (int j = y; j < 4; j++){
+            array[y] = new Moves(b, roll, c);
+            array[y].setStartPos(0);
+            array[y].setEndPos(0);
+            array[y].setWeight(-1);
+            y++;
+        }
+
         return array;
 
     }
