@@ -19,63 +19,73 @@ public class Moves {
         this.boardstate = b.getBoard();
         this.roll = r;
         this.colour = c;
-
     }
-
 
     /**
      * updates the weight of a move for a given piece based on a dice roll & the current board
-     * still missing cases where the weight is 1, 2, 3
+     * @param roll from 1-6
      * @return
      */
     public void updateWeight(){
 
-        if(roll != 6 && inStart())
-            this.weight = -1;
         //assigns a negative weight to trying to leave the start when anything but a 6 is not rolled
 
-        if(!(inStart())){
+        if(!(inHome())){
             switch (roll) {
                 case 1:
-                    if(isOccupied(this.startPos + 1)){
+                    if(!isOccupied(this.board.getSP(this.colour) + 1)){
                         this.weight = 4;
+                    }else if(isOccupied(this.startPos + 1)){
+                        this.weight = 2;
                     }
-                    this.weight = 5;
+                    this.weight = 1;
                     break;
 
                 case 2:
-                    if(isOccupied(this.startPos + 2) ){
+                    if(!isOccupied(this.board.getSP(this.colour) + 2)){
                         this.weight = 4;
+                    }else if(isOccupied(this.startPos + 2) ){
+                        this.weight = 2;
                     }
-                    this.weight = 5;
+                    this.weight = 1;
                     break;
 
                 case 3:
-                    if(isOccupied(this.startPos + 3) ){
+                    if(!isOccupied(this.board.getSP(this.colour) + 3)){
                         this.weight = 4;
+                    }else if(isOccupied(this.startPos + 3) ){
+                        this.weight = 2;
                     }
-                    this.weight = 5;
+                    this.weight = 1;
                     break;
 
                 case 4:
-                    if(isOccupied(this.startPos + 4) ){
+                    if(!isOccupied(this.board.getSP(this.colour) + 4) && this.startPos + 4 == this.board.getEnd(colour)){
+
+                    }else if(!isOccupied(this.board.getSP(this.colour) + 4)){
                         this.weight = 4;
+                    }else if(isOccupied(this.startPos + 4) ){
+                        this.weight = 2;
                     }
-                    this.weight = 5;
+                    this.weight = 1;
                     break;
 
                 case 5:
-                    if(isOccupied(this.startPos + 5) ){
+                    if(!isOccupied(this.board.getSP(this.colour) + 5)){
                         this.weight = 4;
+                    }else if(isOccupied(this.startPos + 5) ){
+                        this.weight = 2;
                     }
-                    this.weight = 5;
+                    this.weight = 1;
                     break;
 
                 case 6:
-                    if(isOccupied(this.startPos + 6) ){
+                    if(!isOccupied(this.board.getSP(this.colour) + 6)){
                         this.weight = 4;
+                    }else if(isOccupied(this.startPos + 6) ){
+                        this.weight = 2;
                     }
-                    this.weight = 5;
+                    this.weight = 1;
                     break;
             }
         }else{
@@ -86,14 +96,20 @@ public class Moves {
     }
     /*
     WEIGHT VALUES BASED ON POSSIBLE MOVES
-    1. GETTING HOME ?????
-    2. CLEARING START TILE ?????
+    5. GETTING TO END
+    4. CLEARING START TILE ?????
     3. MOVING FROM HOME TO START TILE
-    4. KILLING AN OPPONENT
-    5. MOVE
+    2. KILLING AN OPPONENT
+    1. MOVE
     Illegal moves will be assigned negative weights
     */
 
+    public void updateIllegalWeight(){
+        if(this.roll != 6 && inHome())
+            this.weight = -1;
+
+
+    }
 
     // ~~~~~~~~~~~~~~ Additions I made to get this to work ~~~~~~~~~~~~~
 
@@ -108,21 +124,35 @@ public class Moves {
         return endPos;
     }
 
-
-
-    public static Moves[] findMoves(Board b, int roll){
-        return new Moves[5];
+    public void setEndPos(int endPos) {
+        this.endPos = endPos;
     }
 
-    public boolean inStart(){
-        return(board.getSP(this.colour) == this.startPos);
+    public void setStartPos(int startPos){
+        this.startPos = startPos;
+    }
+
+    public static Moves[] findMoves(Board b, int roll, Pieces c) {
+        Moves[] array = new Moves[5];
+        Pieces[] board = b.getBoard();
+        int y = 0;
+        for (int x = 0; x < board.length; x++) {
+            if (board[x] == c) {
+                array[y] = new Moves(b, roll, c);
+                array[y].setStartPos(x);
+                array[y].setEndPos(x + roll);
+                array[y].updateWeight();
+                y++;
+            }
+        }
+    return array;
+    }
+
+    public boolean inHome(){
+        return(this.board.getSP(this.colour) == this.board.getHome(this.colour));
     }
 
     public boolean isOccupied(int i){
         return(boardstate[i] != Pieces.BLACK);
-
     }
-
-
-
 }
