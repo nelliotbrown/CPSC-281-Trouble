@@ -12,14 +12,13 @@ public class Moves {
     private int startPos;
     private int endPos;
 
-
-
     public Moves(Board b, int r, Pieces c){
         this.board = b;
         this.boardstate = b.getBoard();
         this.roll = r;
         this.colour = c;
     }
+
 
     /**
      * updates the weight of a move for a given piece based on a dice roll & the current board
@@ -30,7 +29,6 @@ public class Moves {
         //assigns a negative weight to trying to leave the start when anything but a 6 is not rolled
 
         if(!(inHome())){
-
             if(startPos < 0){
                 this.weight = 3;
                 return;
@@ -99,6 +97,7 @@ public class Moves {
         }
 
     }
+
     /*
     WEIGHT VALUES BASED ON POSSIBLE MOVES
     5. GETTING TO END
@@ -113,7 +112,6 @@ public class Moves {
         if(this.roll != 6 && inHome())
             this.weight = -1;
 
-
     }
 
     // ~~~~~~~~~~~~~~ Additions I made to get this to work ~~~~~~~~~~~~~
@@ -123,10 +121,10 @@ public class Moves {
     }
 
     public int getStartPos(){
-        return startPos;
+        return this.startPos;
     }
     public int getEndPos(){
-        return endPos;
+        return this.endPos;
     }
 
     public void setEndPos(int endPos) {
@@ -177,6 +175,7 @@ public class Moves {
             }
         }
         return array;
+
     }
 
     public boolean inHome(){

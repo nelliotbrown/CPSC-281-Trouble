@@ -21,7 +21,7 @@ public class Players {
             int num = Integer.getInteger(str);
             tree.playerChooseMove(num, d);
         } else {
-            tree.aiChooseMove(d);
+           tree.aiChooseMove(d);
         }
     }
 
@@ -32,6 +32,5 @@ public class Players {
     public void setHuman(boolean s){
         isHuman = s;
     }
-
-
 }
+

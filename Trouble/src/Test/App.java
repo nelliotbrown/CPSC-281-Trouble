@@ -1,10 +1,6 @@
 package Test;
-import java.sql.SQLOutput;
 import java.util.Scanner;
-
-import Logic.MoveNode;
 import Logic.Tree;
-import World.Board;
 import World.Pieces;
 
 public class App {
