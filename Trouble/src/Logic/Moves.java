@@ -196,6 +196,6 @@ public class Moves {
     }
 
     public boolean isOccupied(int i){
-        return(boardstate[i] != Pieces.BLACK);
+        return(boardstate[i % 28] != Pieces.BLACK);
     }
 }
