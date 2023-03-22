@@ -19,7 +19,6 @@ public class Moves {
         this.colour = c;
     }
 
-
     /**
      * updates the weight of a move for a given piece based on a dice roll & the current board
      * @return
