@@ -14,7 +14,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         boolean gameState = false;
-        Tree tree = new Tree(4);
+        Tree tree = new Tree(3);
 
         Players green = new Players(false);
         Players blue = new Players(false);
@@ -25,7 +25,7 @@ public class App {
         String answer = "temp";
 
         while(!answer.equals("y") && !answer.equals("n")) {
-            System.out.println("Do you want Green to be Player or AI? 'y' for Yes, 'n' for No.");
+            System.out.println("Do you want Green to be Player or AI? 'y' for Player, 'n' for AI.");
             answer = scanner.nextLine();
             if (answer.equals("y")) {
                 green.setHuman(true);
@@ -39,7 +39,7 @@ public class App {
         answer = "temp";
 
         while(!answer.equals("y") && !answer.equals("n")) {
-            System.out.println("Do you want Blue to be Player or AI? 'y' for Yes, 'n' for No.");
+            System.out.println("Do you want Blue to be Player or AI? 'y' for Player, 'n' for AI.");
             answer = scanner.nextLine();
             if (answer.equals("y")) {
                 blue.setHuman(true);
@@ -53,7 +53,7 @@ public class App {
         answer = "temp";
 
         while(!answer.equals("y") && !answer.equals("n")){
-            System.out.println("Do you want Red to be Player or AI? 'y' for Yes, 'n' for No.");
+            System.out.println("Do you want Red to be Player or AI? 'y' for Player, 'n' for AI.");
             answer = scanner.nextLine();
             if (answer.equals("y")) {
                 red.setHuman(true);
@@ -81,6 +81,9 @@ public class App {
         gameState = true;
 
         while(gameState){
+
+            System.out.println("MY DAD LIAM SUX");
+
             if(gameState){
                 green.makeMove(tree, green.rollDice());
                 if(tree.getRootNode().getBoard().getEnd(Pieces.GREEN) == 4){

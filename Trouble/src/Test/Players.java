@@ -21,7 +21,9 @@ public class Players {
             int num = Integer.getInteger(str);
             tree.playerChooseMove(num, d);
         } else {
-           tree.aiChooseMove(d);
+            System.out.println("You rolled: " + d);
+            System.out.println(tree.getRootNode().getBoard());
+            tree.aiChooseMove(d);
         }
     }
 
