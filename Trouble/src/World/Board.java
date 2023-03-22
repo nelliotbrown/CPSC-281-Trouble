@@ -168,7 +168,5 @@ public class Board {
         return Arrays.toString(board);
     }
 
-    public String toString(){
-        return Arrays.toString(board);
-    }
+    
 }
