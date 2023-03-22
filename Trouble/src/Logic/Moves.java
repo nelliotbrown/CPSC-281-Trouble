@@ -33,12 +33,11 @@ public class Moves {
 
         //assigns a negative weight to trying to leave the start when anything but a 6 is not rolled
 
-        if(!(inStart())){
+        if(!(inHome())){
             switch (roll) {
                 case 1:
-                if(!isOccupied(this.startPos + 1)){
+                if(!isOccupied(this.board.getSP(this.colour) + 1)){
                     this.weight = 4;
-
                 }else if(isOccupied(this.startPos + 1)){
                     this.weight = 2;
                 }
@@ -46,9 +45,8 @@ public class Moves {
                 break;
 
                 case 2:
-                if(!isOccupied(this.startPos + 2)){
+                if(!isOccupied(this.board.getSP(this.colour) + 2)){
                     this.weight = 4;
-
                 }else if(isOccupied(this.startPos + 2) ){
                     this.weight = 2;
                 }
@@ -56,7 +54,7 @@ public class Moves {
                 break;
                 
                 case 3:
-                if(!isOccupied(this.startPos + 3)){
+                if(!isOccupied(this.board.getSP(this.colour) + 3)){
                     this.weight = 4;
                 }else if(isOccupied(this.startPos + 3) ){
                     this.weight = 2;
@@ -65,7 +63,7 @@ public class Moves {
                 break;
                     
                 case 4:
-                if(!isOccupied(this.startPos + 4)){
+                if(!isOccupied(this.board.getSP(this.colour) + 4)){
                     this.weight = 4;
                 }else if(isOccupied(this.startPos + 4) ){
                     this.weight = 2;
@@ -74,7 +72,7 @@ public class Moves {
                 break;
                 
                 case 5:
-                if(!isOccupied(this.startPos)){
+                if(!isOccupied(this.board.getSP(this.colour) + 5)){
                     this.weight = 4;
                 }else if(isOccupied(this.startPos + 5) ){
                     this.weight = 2;
@@ -83,7 +81,7 @@ public class Moves {
                 break;
                 
                 case 6:
-                if(!isOccupied(this.startPos + 6)){
+                if(!isOccupied(this.board.getSP(this.colour) + 6)){
                     this.weight = 4;
                 }else if(isOccupied(this.startPos + 6) ){
                     this.weight = 2;
@@ -99,7 +97,7 @@ public class Moves {
     } 
     /*
     WEIGHT VALUES BASED ON POSSIBLE MOVES
-    5. GETTING HOME ?????
+    5. GETTING TO END
     4. CLEARING START TILE ?????
     3. MOVING FROM HOME TO START TILE
     2. KILLING AN OPPONENT
@@ -108,7 +106,7 @@ public class Moves {
     */
 
     public void updateIllegalWeight(){
-        if(this.roll != 6 && inStart())
+        if(this.roll != 6 && inHome())
             this.weight = -1;
 
        
@@ -133,8 +131,8 @@ public class Moves {
         return new Moves[5];
     }
 
-    public boolean inStart(){
-        return(board.getSP(this.colour) == this.startPos);
+    public boolean inHome(){
+        return(this.board.getSP(this.colour) == this.board.getHome(this.colour));
     }
 
     public boolean isOccupied(int i){
