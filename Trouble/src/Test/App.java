@@ -1,17 +1,13 @@
 package Test;
-import java.sql.SQLOutput;
 import java.util.Scanner;
-
-import Logic.MoveNode;
 import Logic.Tree;
-import World.Board;
 import World.Pieces;
 
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         boolean gameState = false;
-        Tree tree = new Tree(10);
+        Tree tree = new Tree(4);
 
         Players green = new Players(false);
         Players blue = new Players(false);
@@ -81,7 +77,7 @@ public class App {
             if(gameState){
                 green.makeMove(tree, green.rollDice());
                 if(tree.getRootNode().getBoard().getEnd(Pieces.GREEN) == 4){
-                     gameState = false;
+                    gameState = false;
                 }
             }
 

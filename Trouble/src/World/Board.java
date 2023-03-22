@@ -1,4 +1,3 @@
-
 package World;
 import Logic.Moves;
 import java.util.Arrays;
@@ -79,45 +78,25 @@ public class Board {
                 greenHome--;
             }
 
-           else if(m.getStartPos() == -2){
+            else if(m.getStartPos() == -2){
                 board[blueSP] = Pieces.BLUE;
                 blueHome--;
             }
 
-           else if(m.getStartPos() == -3){
+            else if(m.getStartPos() == -3){
                 board[redSP] = Pieces.RED;
                 redHome--;
             }
 
-           else if(m.getStartPos() == -4){
+            else if(m.getStartPos() == -4){
                 board[yellowSP] = Pieces.YELLOW;
                 yellowHome--;
             }
         }
 
         else if(m.getWeight() == 2){
-            Pieces temp = board[m.getEndPos()];
-            board[m.getEndPos()] = board[m.getStartPos()];
-            board[m.getStartPos()] = Pieces.BLACK;
-            if(temp == Pieces.GREEN){
-                greenHome++;
-            }
-            else if(temp == Pieces.BLUE){
-                blueHome++;
-            }
-            else if(temp == Pieces.RED){
-                redHome++;
-            }
-            else if(temp == Pieces.YELLOW){
-                yellowHome++;
-            }
+
         }
-
-        else if(m.getWeight() == 4 || m.getWeight() == 1){
-            board[m.getEndPos()] = board[m.getStartPos()];
-            board[m.getStartPos()] = Pieces.BLACK;
-       }
-
 
     }
 
@@ -161,7 +140,6 @@ public class Board {
         }else{
             return redEnd;
         }
-
     }
 
     public String toString(){
