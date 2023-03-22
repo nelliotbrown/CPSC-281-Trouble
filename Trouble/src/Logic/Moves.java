@@ -23,7 +23,6 @@ public class Moves {
 
     /**
      * updates the weight of a move for a given piece based on a dice roll & the current board
-     * @param roll from 1-6
      * @return
      */
     public void updateWeight(){
@@ -133,14 +132,14 @@ public class Moves {
     }
 
     public static Moves[] findMoves(Board b, int roll, Pieces c) {
-        Moves[] array = new Moves[5];
+        Moves[] array = new Moves[4];
         Pieces[] board = b.getBoard();
         int y = 0;
         for (int x = 0; x < board.length; x++) {
             if (board[x] == c) {
                 array[y] = new Moves(b, roll, c);
                 array[y].setStartPos(x);
-                array[y].setEndPos(x + roll);
+                array[y].setEndPos((x + roll) % 28);
                 array[y].updateWeight();
                 y++;
             }
