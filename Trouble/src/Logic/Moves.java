@@ -30,9 +30,7 @@ public class Moves {
         this.boardstate = b.getBoard();
         this.roll = r;
         this.colour = c;
-
     }
-
 
     /**
      * updates the weight of a move for a given piece based on a dice roll & the current board 
