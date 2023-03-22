@@ -27,8 +27,8 @@ public class Moves {
     public void updateWeight(){
 
         //assigns a negative weight to trying to leave the start when anything but a 6 is not rolled
+        if(!(inHome()) && roll == 6){
 
-        if(!(inHome())){
             if(startPos < 0){
                 this.weight = 3;
                 return;
