@@ -120,6 +120,14 @@ public class Moves {
         return weight;
     }
 
+    public int getStartPos(){
+        return this.startPos;
+    }
+
+    public int getEndPos(){
+        return this.endPos;
+    }
+
 
     public static Moves[] findMoves(Board b, int roll){
         return new Moves[5];
