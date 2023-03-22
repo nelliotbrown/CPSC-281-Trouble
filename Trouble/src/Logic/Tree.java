@@ -5,70 +5,51 @@ import World.Pieces;
 
 public class Tree {
 
-    //TODO liam says don't make him do any illegal moves, ie killing your own people
-
-    //TODO if truncating the tree add a boolean to moveNode
-
     private MoveNode rootNode;
-    private int layers;
 
     /**
+     * Initializes a decision tree. Set up for green to start the game.
      *
-     * @param layers Number of layers the tree will have.
+     * @param layers Number of layers in the tree. Each layer is made up of a row of dice nodes and move nodes
+     *               for one player. Needs a minimum value of 1.
      */
     public Tree(int layers) {
 
         rootNode = new MoveNode(new Board());
-        this.layers = layers;
 
-        for(int i = 0; i < layers; i++){
+        for(int i = 0; i <= layers; i++){
             this.traverseAndAddLayer(rootNode);
         }
-
     }
 
     /**
-     * Adds a layer of dice Nodes and move Nodes below node,
-     * for one player's turn
+     * Adds a layer of dice Nodes and move Nodes below node.
      *
-     * @param node Node that layers are added to
+     * @param node Node that layers are added beneath, Node must be a leaf node
      */
-    public void addNodes(MoveNode node) {
+    private void addNodes(MoveNode node) {
         node.makeChildren(); // Adds dice Nodes
-
         for(int i = 0; i < 6; i++){ //Adds move Nodes below the Dice Nodes
             node.getChild(i).makeChildren();
         }
     }
 
     /**
-     * Adds layers to the botoom of the tra
-     */
-    private void traverseAndAddLayer(){
-        traverseAndAddLayer(rootNode);
-    }
-
-
-    /**
-     * Adds "layers" to bottom of board
+     * Adds a layer of nodes to all leaf nodes beneath the input node.
      *
-     * MAY BREAK IF WE MAKE SOME CHILDREN NULL (SPECIFICAlLY 0) INDEX
-     *
-     * @param node
+     * @param node Node described as above. Should input the root node unless doing something crazy
      */
     private void traverseAndAddLayer(MoveNode node) {
 
         MoveNode current = node;
 
         if (current.getChild(0) != null) {
-
             for(int i = 0; i < 6; i++){
                 for(int j = 0; j < 4; j++){
                     current = current.getChild(i).getChild(j);
                     traverseAndAddLayer(current);
                 }
             }
-
         } else {
             addNodes(current);
         }
@@ -76,15 +57,14 @@ public class Tree {
     }
 
     /**
+     * Updates the weights of all nodes beneath the input Node. Designed to work with rootNode, will set up the
+     * weights for the next player's turn.
      *
-     *
-     * @param node
-     * @param isAdding true to add score (your own turn), false to subtract
+     * @param node Please put root node in here.
      */
-    public void traverseAndUpdateWeights(MoveNode node, boolean isAdding) {
+    private void traverseAndUpdateWeights(MoveNode node) {
 
-        //TODO: Maybe replace isAdding with depth ???
-
+        Pieces color = DiceNode.nextColor(rootNode.getColor());
         MoveNode current = node;
 
         if (current.getChild(0) != null) { //Recursively travel down the tree
@@ -92,22 +72,22 @@ public class Tree {
             for(int i = 0; i < 6; i++){
                 for(int j = 0; j < 4; j++){
                     current = current.getChild(i).getChild(j);
-                    traverseAndUpdateWeights(current, isAdding);
+                    traverseAndUpdateWeights(current);
                 }
-                current.getChild(i).updateWeight(isAdding); //Update the dice Node
+//                current.getChild(i).updateWeight( true); //Update the dice Node
+                DiceNode child = current.getChild(i);
+                child.updateWeight( (color == child.getColor()) ); // If dice node is your color add weight,
             }
-
             current.updateWeight(); //Update the move Node
         }
     }
 
 
-
     /**
-     * the ai chooses the moveNode with the highest score,
-     * sets rootNode to
+     * AI will choose the move with the highest weight, given a die roll. Sets the chosen MoveNode to the root
+     * of the tree, adds a layer of nodes to the tree, updates the weights for the next player.
      *
-     * @param diceRoll
+     * @param diceRoll dice roll for the turn
      */
     public void aiChooseMove(int diceRoll){
         int moveChoice = 0;
@@ -122,15 +102,16 @@ public class Tree {
         rootNode.setParent(null);
 
         traverseAndAddLayer(rootNode);
-        traverseAndUpdateWeights(rootNode, true);
+        traverseAndUpdateWeights(rootNode);
     }
 
 
     /**
+     * Player chooses a move given a die roll and starting position of the move. Sets the chosen MoveNode to the root
+     * of the tree, adds a layer of nodes to the tree, updates the weights for the next player.
      *
-     *
-     * @param diceRoll
-     * @param startPos
+     * @param diceRoll dice roll for the turn
+     * @param startPos starting position of piece that will be moved
      */
     public void playerChooseMove(int diceRoll, int startPos) {
         int moveChoice = 0;
@@ -145,8 +126,16 @@ public class Tree {
         rootNode.setParent(null);
 
         traverseAndAddLayer(rootNode);
-        traverseAndUpdateWeights(rootNode, true);
+        traverseAndUpdateWeights(rootNode);
     }
+
+    /**
+     * @return rootNode of the tree
+     */
+    public MoveNode getRootNode(){
+        return rootNode;
+    }
+
 }
 
 

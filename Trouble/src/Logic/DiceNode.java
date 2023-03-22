@@ -7,23 +7,26 @@ public class DiceNode{
     private final int diceRoll;
     private final Pieces color;
     private int weight; // Total score for AI to decide move
+
     private MoveNode[] children;
     public MoveNode parent;
 
     /**
+     * Constructor for DiceNode.
      *
-     * @param diceRoll
-     * @param parent
+     * @param diceRoll die roll given for DiceNode
+     * @param parent MoveNode parent
      */
     public DiceNode(int diceRoll, MoveNode parent){
         this.diceRoll = diceRoll;
         this.parent = parent;
         this.color = nextColor(parent.getColor());
+        this.children = new MoveNode[4];
     }
 
 
     /**
-     * Makes moveNode children that have each piece moved f
+     * Adds MoveNode children to a DiceNode.
      */
     public void makeChildren() {
 
@@ -46,20 +49,19 @@ public class DiceNode{
         weight = children[0].getWeight();
 
         for (MoveNode child : children) {
-
             if (isAdding) {
                 weight = Math.max(weight, child.getWeight());
             } else {
                 weight = Math.min(weight, child.getWeight());
             }
         }
-
     }
 
     /**
-     *
+     * @param color color whose successor color will be returned
+     * @return The next color in the order of turns
      */
-    private static Pieces nextColor(Pieces color){
+    public static Pieces nextColor(Pieces color){
 
         if (color == Pieces.GREEN){
             return Pieces.BLUE;
@@ -71,25 +73,17 @@ public class DiceNode{
             return Pieces.GREEN;
         } else {
             //TODO delete this after bug fixing
-            System.out.println("THAT COLOR DOESN'T EXIST HOMIE");
+            System.out.println("THAT COLOR DOESN'T EXIST");
+            return Pieces.BLACK;
         }
-
-        return Pieces.BLACK;
     }
 
 
     // ~~~~~ Setters and Getters ~~~~~
 
-    /**
-     * Returns child i
-     *
-     * @param i
-     * @return
-     */
     public MoveNode getChild(int i){
         return children[i];
     }
-
 
     public int getWeight(){
         return weight;

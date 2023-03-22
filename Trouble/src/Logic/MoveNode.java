@@ -11,13 +11,12 @@ public class MoveNode {
     private final Pieces color;
     private int weight; // Score from Move object
 
-
-    private DiceNode[] children;
+    private final DiceNode[] children;
     private DiceNode parent;
 
 
     /**
-     * Used for intializing tree
+     * Used for initializing tree
      *
      * @param board initial position board
      */
@@ -26,12 +25,14 @@ public class MoveNode {
         this.moves = null;
         this.weight = 0;
         this.parent = null;
-        this.color = Pieces.GREEN;
+        this.color = Pieces.YELLOW;
         children = new DiceNode[6];
     }
 
 
     /**
+     * Constructor for MoveNode
+     *
      * @param move Moves object (returned from findMoves)
      * @param board Board object of grandparent, acted on by move.
      */
@@ -45,21 +46,18 @@ public class MoveNode {
     }
 
     /**
-     * Fills out children with dice nodes with values 1-6.
+     * Fills out MoveNode's children with DiceNodes (values 1-6).
      */
     public void makeChildren() {
-
         for(int i = 0; i < 6; i++){
             children[i] = new DiceNode(i + 1, this);
         }
-
     }
 
 
     /**
      * Updates weight of Node. Sets weight to the average of Dice Node weights since
      * it is probabilistic.
-     *
      */
     public void updateWeight(){
 
@@ -87,12 +85,6 @@ public class MoveNode {
         this.parent = parent;
     }
 
-    /**
-     * Returns child i
-     *
-     * @param i
-     * @return
-     */
     public DiceNode getChild(int i){
         return children[i];
     }
@@ -105,5 +97,7 @@ public class MoveNode {
         return this.color;
     }
 
-
+    public DiceNode getParent() {
+        return parent;
+    }
 }
