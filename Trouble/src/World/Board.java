@@ -79,17 +79,17 @@ public class Board {
                 greenHome--;
             }
 
-            else if(m.getStartPos() == -2){
+           else if(m.getStartPos() == -2){
                 board[blueSP] = Pieces.BLUE;
                 blueHome--;
             }
 
-            else if(m.getStartPos() == -3){
+           else if(m.getStartPos() == -3){
                 board[redSP] = Pieces.RED;
                 redHome--;
             }
 
-            else if(m.getStartPos() == -4){
+           else if(m.getStartPos() == -4){
                 board[yellowSP] = Pieces.YELLOW;
                 yellowHome--;
             }
@@ -161,13 +161,12 @@ public class Board {
         }else{
             return redEnd;
         }
+
     }
 
     public String toString(){
         return Arrays.toString(board);
     }
 
-    public String toString(){
-        return Arrays.toString(board);
-    }
+    
 }
