@@ -24,14 +24,6 @@ public class Moves {
 
 
 
-
-    public Moves(Board b, int r, Pieces c){
-        this.board = b;
-        this.boardstate = b.getBoard();
-        this.roll = r;
-        this.colour = c;
-    }
-
     /**
      * updates the weight of a move for a given piece based on a dice roll & the current board
      * @return
@@ -137,12 +129,6 @@ public class Moves {
     public int getStartPos(){
         return this.startPos;
     }
-
-    public int getEndPos(){
-        return this.endPos;
-    }
-
-
 
     public int getEndPos(){
         return this.endPos;
