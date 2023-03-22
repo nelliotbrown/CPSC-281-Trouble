@@ -1,8 +1,4 @@
-
 package World;
-import Logic.Moves;
-import java.util.Arrays;
-
 import Logic.Moves;
 import java.util.Arrays;
 
@@ -38,6 +34,7 @@ public class Board {
         for(int x = 0; x < board.length; x++){
             board[x] = b.getBoard()[x];
         }
+
         greenHome = b.getHome(Pieces.GREEN);
         blueHome = b.getHome(Pieces.BLUE);
         redHome = b.getHome(Pieces.RED);
@@ -48,87 +45,6 @@ public class Board {
         redEnd = b.getEnd(Pieces.RED);
         yellowEnd = b.getEnd(Pieces.YELLOW);
 
-        for(int x = 0; x < blueEnd.length; x++){
-            blueEnd[x] = b.getEnd(Pieces.BLUE)[x];
-        }
-
-        for(int x = 0; x < redEnd.length; x++){
-            redEnd[x] = b.getEnd(Pieces.RED)[x];
-        }
-
-        for(int x = 0; x < yellowEnd.length; x++){
-            yellowEnd[x] = b.getEnd(Pieces.YELLOW)[x];
-        }
-
-        if(m.getWeight() == 1){
-                            
-        }
-
-        greenHome = b.getHome(Pieces.GREEN);
-        blueHome = b.getHome(Pieces.BLUE);
-        redHome = b.getHome(Pieces.RED);
-        yellowHome = b.getHome(Pieces.YELLOW);
-        Pieces temp = board[m.getStartPos()];
-        board[m.getStartPos()] = Pieces.BLACK;
-        board[m.getEndPos()] = temp;
-    }
-
-
-    public Pieces[] getBoard(){
-        return board;
-    }
-
-
-    public int getHome(Pieces c){
-        if(c == Pieces.YELLOW){
-            return yellowHome;
-        }else if(c == Pieces.GREEN){
-            return greenHome;
-        }else if(c == Pieces.BLUE){
-            return blueHome;
-        }else{
-            return redHome;
-        }
-    }
-
-    public int getSP(Pieces c){
-        if(c == Pieces.YELLOW){
-            return yellowSP;
-        }else if(c == Pieces.GREEN){
-            return greenSP;
-        }else if(c == Pieces.BLUE){
-            return blueSP;
-        }else{
-            return redSP;
-        }
-    }
-
-    public Pieces[] getEnd(Pieces c) {
-        if(c == Pieces.YELLOW){
-            return yellowEnd;
-        }else if(c == Pieces.GREEN){
-            return greenEnd;
-        }else if(c == Pieces.BLUE){
-            return blueEnd;
-        }else{
-            return redEnd;
-        }
-
-        for(int x = 0; x < blueEnd.length; x++){
-            blueEnd[x] = b.getEnd(Pieces.BLUE)[x];
-        }
-
-        for(int x = 0; x < redEnd.length; x++){
-            redEnd[x] = b.getEnd(Pieces.RED)[x];
-        }
-
-        for(int x = 0; x < yellowEnd.length; x++){
-            yellowEnd[x] = b.getEnd(Pieces.YELLOW)[x];
-        }
-
-        if(m.getWeight() == 1){
-
-        }
 
         greenHome = b.getHome(Pieces.GREEN);
         blueHome = b.getHome(Pieces.BLUE);
@@ -162,45 +78,25 @@ public class Board {
                 greenHome--;
             }
 
-           else if(m.getStartPos() == -2){
+            else if(m.getStartPos() == -2){
                 board[blueSP] = Pieces.BLUE;
                 blueHome--;
             }
 
-           else if(m.getStartPos() == -3){
+            else if(m.getStartPos() == -3){
                 board[redSP] = Pieces.RED;
                 redHome--;
             }
 
-           else if(m.getStartPos() == -4){
+            else if(m.getStartPos() == -4){
                 board[yellowSP] = Pieces.YELLOW;
                 yellowHome--;
             }
         }
 
         else if(m.getWeight() == 2){
-            Pieces temp = board[m.getEndPos()];
-            board[m.getEndPos()] = board[m.getStartPos()];
-            board[m.getStartPos()] = Pieces.BLACK;
-            if(temp == Pieces.GREEN){
-                greenHome++;
-            }
-            else if(temp == Pieces.BLUE){
-                blueHome++;
-            }
-            else if(temp == Pieces.RED){
-                redHome++;
-            }
-            else if(temp == Pieces.YELLOW){
-                yellowHome++;
-            }
+
         }
-
-        else if(m.getWeight() == 4 || m.getWeight() == 1){
-            board[m.getEndPos()] = board[m.getStartPos()];
-            board[m.getStartPos()] = Pieces.BLACK;
-       }
-
 
     }
 
@@ -244,7 +140,6 @@ public class Board {
         }else{
             return redEnd;
         }
-
     }
 
     public String toString(){

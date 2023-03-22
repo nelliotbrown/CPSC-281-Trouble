@@ -32,6 +32,5 @@ public class Players {
     public void setHuman(boolean s){
         isHuman = s;
     }
-
-
 }
+
