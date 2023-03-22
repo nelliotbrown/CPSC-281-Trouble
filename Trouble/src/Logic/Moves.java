@@ -111,9 +111,7 @@ public class Moves {
         if(this.roll != 6 && inStart())
             this.weight = -1;
 
-        if(isOccupied(this.startPos + roll));    
-            this.weight = -1;
-
+       
     }
 
     // ~~~~~~~~~~~~~~ Additions I made to get this to work ~~~~~~~~~~~~~
