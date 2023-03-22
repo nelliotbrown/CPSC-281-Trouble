@@ -79,9 +79,10 @@ public class DiceNode{
     }
 
     /**
-     *
+     * @param color color whose successor color will be returned
+     * @return The next color in the order of turns
      */
-    private static Pieces nextColor(Pieces color){
+    public static Pieces nextColor(Pieces color){
 
         if (color == Pieces.GREEN){
             return Pieces.BLUE;
@@ -93,10 +94,9 @@ public class DiceNode{
             return Pieces.GREEN;
         } else {
             //TODO delete this after bug fixing
-            System.out.println("THAT COLOR DOESN'T EXIST HOMIE");
+            System.out.println("THAT COLOR DOESN'T EXIST");
+            return Pieces.BLACK;
         }
-
-        return Pieces.BLACK;
     }
 
 
