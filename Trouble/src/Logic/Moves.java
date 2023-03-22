@@ -26,89 +26,88 @@ public class Moves {
     public void updateWeight(){
 
         //assigns a negative weight to trying to leave the start when anything but a 6 is not rolled
-        if(!(inHome()) && roll == 6){
+        
+        if(startPos < 0){
+            this.weight = 3;
+            return;
+        }
 
-            if(startPos < 0){
-                this.weight = 3;
-                return;
-            }
-
-            switch (roll) {
-                case 1:
-                if(!isOccupied(this.board.getSP(this.colour) + 1) && this.startPos + 1 == this.board.getEnd(colour)){
-                    this.weight = 5;
-                }else if(!isOccupied(this.board.getSP(this.colour) + 1)){
-                    this.weight = 4;
-                }else if(isOccupied(this.startPos + 1)){
-                    this.weight = 2;
-                }else{
-                    this.weight = 1;
-                }
-                break;
-
-                case 2:
-                if(!isOccupied(this.board.getSP(this.colour) + 2) && this.startPos + 2 == this.board.getEnd(colour)){
-                    this.weight = 5;
-                }else if(!isOccupied(this.board.getSP(this.colour) + 2)){
-                    this.weight = 4;
-                }else if(isOccupied(this.startPos + 2)){
-                    this.weight = 2;
-                }else{
-                    this.weight = 1;
-                }
-                break;
-
-                case 3:
-                if(!isOccupied(this.board.getSP(this.colour) + 3) && this.startPos + 3 == this.board.getEnd(colour)){
-                    this.weight = 5;
-                }else if(!isOccupied(this.board.getSP(this.colour) + 3)){
-                    this.weight = 4;
-                }else if(isOccupied(this.startPos + 3)){
-                    this.weight = 2;
-                }else{
-                    this.weight = 1;
-                }
-                break;
-
-                case 4:
-                    if(!isOccupied(this.board.getSP(this.colour) + 4) && this.startPos + 4 == this.board.getEnd(colour)){
-                        this.weight = 5;
-                    }else if(!isOccupied(this.board.getSP(this.colour) + 4)){
-                        this.weight = 4;
-                    }else if(isOccupied(this.startPos + 4) ){
-                        this.weight = 2;
-                    }else{
-                    this.weight = 1;
-                    }
-                    break;
-
-                case 5:
-                    if(!isOccupied(this.board.getSP(this.colour) + 5) && this.startPos + 5 == this.board.getEnd(colour)){
-                        this.weight = 5;
-                    }else if(!isOccupied(this.board.getSP(this.colour) + 5)){
-                        this.weight = 4;
-                    }else if(isOccupied(this.startPos + 5)){
-                        this.weight = 2;
-                    }else{
-                    this.weight = 1;
-                    }
-                    break;
-
-                case 6:
-                if(!isOccupied(this.board.getSP(this.colour) + 6) && this.startPos + 6 == this.board.getEnd(colour)){
-                    this.weight = 5;
-                }else if(!isOccupied(this.board.getSP(this.colour) + 6)){
-                    this.weight = 4;
-                }else if(isOccupied(this.startPos + 6)){
-                    this.weight = 2;
-                }else{
+        switch (roll) {
+            case 1:
+            if(!isOccupied(this.board.getSP(this.colour) + 1) && this.startPos + 1 == this.board.getEnd(colour)){
+                this.weight = 5;
+            }else if(!isOccupied(this.board.getSP(this.colour) + 1)){
+                this.weight = 4;
+            }else if(isOccupied(this.startPos + 1)){
+                this.weight = 2;
+            }else{
                 this.weight = 1;
-                }
-                break;
+            }
+            break;
+
+            case 2:
+            if(!isOccupied(this.board.getSP(this.colour) + 2) && this.startPos + 2 == this.board.getEnd(colour)){
+                this.weight = 5;
+            }else if(!isOccupied(this.board.getSP(this.colour) + 2)){
+                this.weight = 4;
+            }else if(isOccupied(this.startPos + 2)){
+                this.weight = 2;
+            }else{
+                this.weight = 1;
+            }
+            break;
+
+            case 3:
+            if(!isOccupied(this.board.getSP(this.colour) + 3) && this.startPos + 3 == this.board.getEnd(colour)){
+                this.weight = 5;
+            }else if(!isOccupied(this.board.getSP(this.colour) + 3)){
+                this.weight = 4;
+            }else if(isOccupied(this.startPos + 3)){
+                this.weight = 2;
+            }else{
+                this.weight = 1;
+            }
+            break;
+
+            case 4:
+            if(!isOccupied(this.board.getSP(this.colour) + 4) && this.startPos + 4 == this.board.getEnd(colour)){
+                this.weight = 5;
+            }else if(!isOccupied(this.board.getSP(this.colour) + 4)){
+                this.weight = 4;
+            }else if(isOccupied(this.startPos + 4) ){
+                this.weight = 2;
+            }else{
+                this.weight = 1;
+            }
+            break;
+
+            case 5:
+            if(!isOccupied(this.board.getSP(this.colour) + 5) && this.startPos + 5 == this.board.getEnd(colour)){
+                this.weight = 5;
+            }else if(!isOccupied(this.board.getSP(this.colour) + 5)){
+                this.weight = 4;
+            }else if(isOccupied(this.startPos + 5)){
+                this.weight = 2;
+            }else{
+                this.weight = 1;
+            }
+            break;
+
+            case 6:
+            if(!isOccupied(this.board.getSP(this.colour) + 6) && this.startPos + 6 == this.board.getEnd(colour)){
+                this.weight = 5;
+            }else if(!isOccupied(this.board.getSP(this.colour) + 6)){
+                this.weight = 4;
+            }else if(isOccupied(this.startPos + 6)){
+                this.weight = 2;
+            }else{
+                this.weight = 1;
+            }
+            break;
             }
         }
 
-    }
+    
 
     /*
     WEIGHT VALUES BASED ON POSSIBLE MOVES
