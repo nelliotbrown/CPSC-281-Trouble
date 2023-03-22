@@ -30,7 +30,7 @@ public class DiceNode{
      */
     public void makeChildren() {
 
-        Moves[] moves = Moves.findMoves( parent.getBoard(), diceRoll );
+        Moves[] moves = Moves.findMoves( parent.getBoard(), diceRoll, this.color );
 
         children = new MoveNode[4];
 
