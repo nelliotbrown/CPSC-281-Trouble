@@ -165,6 +165,33 @@ public class Board {
     }
 
     public String toString(){
-        return Arrays.toString(board);
+
+        StringBuilder str = new StringBuilder("");
+
+        str.append("\n");
+        str.append("Green Home: ").append(greenHome).append(", Blue Home: ").append(blueHome).append(", Red Home: ").append(redHome).append(", Yellow Home: ").append(yellowHome);
+        str.append("\n");
+        for(int i = 0; i < 28; i++){
+            str.append("(").append(i).append(", ").append(toStringHelper(this.board[i])).append("), ");
+        }
+        str.append("\n");
+        str.append("Green End: ").append(greenEnd).append(", Blue End: ").append(blueEnd).append(", Red End: ").append(redEnd).append(", Yellow End: ").append(yellowEnd);
+        str.append("\n");
+
+        return str.toString();
+    }
+
+    public String toStringHelper(Pieces c){
+        if(c == Pieces.GREEN){
+            return "G";
+        } else if(c == Pieces.BLUE){
+            return "B";
+        } else if(c == Pieces.YELLOW){
+            return "Y";
+        } else if(c == Pieces.RED){
+            return "R";
+        } else {
+            return "n";
+        }
     }
 }

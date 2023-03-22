@@ -18,8 +18,8 @@ public class Players {
             System.out.println(tree.getRootNode().getBoard());
             System.out.println("Where do you want to move from ? ");
             String str = scanner.nextLine();
-            int num = Integer.getInteger(str);
-            tree.playerChooseMove(num, d);
+            int num = Integer.parseInt(str);
+            tree.playerChooseMove(d, num);
         } else {
             System.out.println("You rolled: " + d);
             System.out.println(tree.getRootNode().getBoard());
