@@ -41,7 +41,8 @@ public class Moves {
                 }else if(isOccupied(this.startPos + 1)){
                     this.weight = 2;
                 }
-                this.weight = 1;
+                else{this.weight = 1;
+                }
                 break;
 
                 case 2:
@@ -50,7 +51,8 @@ public class Moves {
                 }else if(isOccupied(this.startPos + 2) ){
                     this.weight = 2;
                 }
-                this.weight = 1;
+                else{this.weight = 1;
+                }
                 break;
                 
                 case 3:
@@ -59,8 +61,10 @@ public class Moves {
                 }else if(isOccupied(this.startPos + 3) ){
                     this.weight = 2;
                 }
-                this.weight = 1;
+                else{this.weight = 1;
+                }
                 break;
+                
                     
                 case 4:
                 if(!isOccupied(this.board.getSP(this.colour) + 4) && this.startPos + 4 == this.board.getEnd(colour)){
@@ -69,8 +73,9 @@ public class Moves {
                     this.weight = 4;
                 }else if(isOccupied(this.startPos + 4) ){
                     this.weight = 2;
-                }
+                }else{
                 this.weight = 1;
+                }
                 break;
                 
                 case 5:
@@ -78,8 +83,9 @@ public class Moves {
                     this.weight = 4;
                 }else if(isOccupied(this.startPos + 5) ){
                     this.weight = 2;
-                }
+                }else{
                 this.weight = 1;
+                }
                 break;
                 
                 case 6:
@@ -87,8 +93,9 @@ public class Moves {
                     this.weight = 4;
                 }else if(isOccupied(this.startPos + 6) ){
                     this.weight = 2;
-                }
+                }else{
                 this.weight = 1;
+                }
                 break;    
             }
         }else{
