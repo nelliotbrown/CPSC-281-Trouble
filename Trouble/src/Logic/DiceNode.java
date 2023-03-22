@@ -82,22 +82,7 @@ public class DiceNode{
      * @param color color whose successor color will be returned
      * @return The next color in the order of turns
      */
-    public static Pieces nextColor(Pieces color){
-
-        if (color == Pieces.GREEN){
-            return Pieces.BLUE;
-        } else if (color == Pieces.BLUE){
-            return Pieces.RED;
-        } else if (color == Pieces.RED){
-            return Pieces.YELLOW;
-        } else if (color == Pieces.YELLOW){
-            return Pieces.GREEN;
-        } else {
-            //TODO delete this after bug fixing
-            System.out.println("THAT COLOR DOESN'T EXIST");
-            return Pieces.BLACK;
-        }
-    }
+    
 
 
     // ~~~~~ Setters and Getters ~~~~~
