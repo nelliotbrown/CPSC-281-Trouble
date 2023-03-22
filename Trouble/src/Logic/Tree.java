@@ -125,12 +125,16 @@ public class Tree {
      * @param startPos starting position of piece that will be moved
      */
     public void playerChooseMove(int diceRoll, int startPos) {
-        int moveChoice = 0;
+        int moveChoice = -1;
 
         for (int i = 0; i < 4; i++) {
             if (rootNode.getChild(diceRoll - 1).getChild(i).getMoveStartingPos() == startPos) {
                 moveChoice = i;
             }
+        }
+
+        if(moveChoice == -1){
+            System.out.println("YOU IDIOT YOU COULDN'T MOVE THAT PIECE");
         }
 
         rootNode = rootNode.getChild(diceRoll - 1).getChild(moveChoice);
