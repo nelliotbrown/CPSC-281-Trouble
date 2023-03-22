@@ -63,7 +63,9 @@ public class Moves {
                 break;
                     
                 case 4:
-                if(!isOccupied(this.board.getSP(this.colour) + 4)){
+                if(!isOccupied(this.board.getSP(this.colour) + 4) && this.startPos + 4 == this.board.getEnd(colour)){
+
+                }else if(!isOccupied(this.board.getSP(this.colour) + 4)){
                     this.weight = 4;
                 }else if(isOccupied(this.startPos + 4) ){
                     this.weight = 2;
