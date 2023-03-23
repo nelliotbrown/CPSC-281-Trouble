@@ -21,7 +21,7 @@ public class Tree {
             this.traverseAndAddLayer(rootNode);
         }
 
-//        this.traverseAndUpdateWeights(rootNode);
+        this.traverseAndUpdateWeights(rootNode);
     }
 
     /**
@@ -48,8 +48,7 @@ public class Tree {
         if (current.getChild(0) != null) {
             for(int i = 0; i < 6; i++){
                 for(int j = 0; j < 4; j++){
-                    current = current.getChild(i).getChild(j);
-                    traverseAndAddLayer(current);
+                    traverseAndAddLayer(current.getChild(i).getChild(j));
                 }
             }
         } else {
@@ -73,23 +72,14 @@ public class Tree {
 
             for(int i = 0; i < 6; i++){
                 for(int j = 0; j < 4; j++){
-//                    current = current.getChild(i).getChild(j);
-                    if(current.getChild(i) != null) {
-                        DiceNode dN = current.getChild(i);
-                        current = dN.getChild(j);
-                        traverseAndUpdateWeights(current);
-                    }
+                    traverseAndUpdateWeights(current.getChild(i).getChild(j));
                 }
-//                current.getChild(i).updateWeight( true); //Update the dice Node
-                if(current.getChild(0) != null) {
-                    DiceNode child = current.getChild(i);
-                    child.updateWeight((color == child.getColor())); // If dice node is your color add weight,
-                }
+
+                DiceNode child = current.getChild(i);
+                child.updateWeight( color == child.getColor() ); // If dice node is your color add weight, else subtract
             }
 
-            if(current.getChild(0) != null) {
-                current.updateWeight(); //Update the move Node
-            }
+            current.updateWeight(); //Update the move Node
         }
     }
 

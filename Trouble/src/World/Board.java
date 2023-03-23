@@ -121,11 +121,9 @@ public class Board {
 
     }
 
-
     public Pieces[] getBoard(){
         return board;
     }
-
 
     public int getHome(Pieces c){
         if(c == Pieces.YELLOW){
@@ -164,6 +162,7 @@ public class Board {
 
     }
 
+    @Override
     public String toString(){
 
         StringBuilder str = new StringBuilder("");
@@ -194,4 +193,9 @@ public class Board {
             return "n";
         }
     }
+
+    //TODO make a method to return indices of all pieces to help determine when there is no legal moves
+    // and stop moving when there's no piece in the index
+
+
 }
