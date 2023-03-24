@@ -16,6 +16,7 @@ public class Tree {
     public Tree(int layers) {
 
         rootNode = new MoveNode(new Board());
+        rootNode.setInitialBoardMove();
 
         for(int i = 0; i <= layers; i++){
             this.traverseAndAddLayer(rootNode);
@@ -75,12 +76,14 @@ public class Tree {
                     traverseAndUpdateWeights(current.getChild(i).getChild(j));
                 }
 
-                DiceNode child = current.getChild(i);
-                child.updateWeight( color == child.getColor() ); // If dice node is your color add weight, else subtract
+                // If dice node is your color add weight, else subtract
+                current.getChild(i).updateWeight(color == current.getChild(i).getColor());
             }
 
-            current.updateWeight(); //Update the move Node
+            current.updateWeight( color == current.getColor() );//Update the move Node
         }
+
+//        System.out.print(current.getWeight());
     }
 
 
@@ -94,11 +97,14 @@ public class Tree {
         int moveChoice = 0;
 
         for(int i = 0; i < 4; i++){
+            System.out.println("Option " + i + ", weight: " + rootNode.getChild(diceRoll - 1).getChild(i).getWeight()
+            + ", starting position: " + rootNode.getChild(diceRoll - 1).getChild(i).getMoveStartingPos() );
             if(rootNode.getChild(diceRoll - 1).getChild(i).getWeight() > moveChoice){
                 moveChoice = i;
             }
         }
 
+        System.out.println("Chose " + moveChoice);
         rootNode = rootNode.getChild(diceRoll - 1).getChild(moveChoice);
         rootNode.setParent(null);
 

@@ -6,7 +6,7 @@ import World.Pieces;
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Tree tree = new Tree(3);
+        Tree tree = new Tree(1);
 
         Players green = new Players(false);
         Players blue = new Players(false);

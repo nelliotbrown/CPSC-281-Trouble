@@ -1,4 +1,5 @@
 package Test;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
@@ -8,9 +9,9 @@ import Logic.Tree;
 import World.Pieces;
 
 public class Players {
-    private Random rand = new Random();
+    private final Random rand = new Random();
     private boolean isHuman;
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public Players(boolean isHuman){
         this.isHuman = isHuman;
@@ -22,10 +23,11 @@ public class Players {
             Pieces color = DiceNode.nextColor(tree.getRootNode().getColor());
             System.out.println("\n" + color + " rolled: " + d);
             System.out.println(tree.getRootNode().getBoard());
+            System.out.println(Arrays.toString(tree.getRootNode().getBoard().legalPieceIndices(color)));
 
             String str;
             int num = 0;
-            boolean goodValue = true;
+            boolean goodValue;
 
             do {
 

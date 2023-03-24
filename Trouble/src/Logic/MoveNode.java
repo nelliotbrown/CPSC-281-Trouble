@@ -7,10 +7,9 @@ import World.Pieces;
 public class MoveNode {
 
     private final Board board; // Node's copy of the board
-    private final Moves moves;
     private final Pieces color;
     private int weight; // Score from Move object
-
+    private  Moves moves;
     private final DiceNode[] children;
     private DiceNode parent;
 
@@ -59,15 +58,19 @@ public class MoveNode {
      * Updates weight of Node. Sets weight to the average of Dice Node weights since
      * it is probabilistic.
      */
-    public void updateWeight(){
-
-        int newWeight = 0;
+    public void updateWeight( boolean isAdding ){
+        int newWeight = getChild(0).getWeight();
 
         for (DiceNode child : children) {
             newWeight += child.getWeight();
         }
 
-        weight = newWeight/children.length;
+        if(isAdding){
+            weight = newWeight + moves.getWeight();
+        } else {
+            weight = newWeight - moves.getWeight();
+        }
+
     }
 
 
@@ -99,5 +102,9 @@ public class MoveNode {
 
     public DiceNode getParent() {
         return parent;
+    }
+
+    public void setInitialBoardMove(){
+        this.moves = new Moves(0);
     }
 }
