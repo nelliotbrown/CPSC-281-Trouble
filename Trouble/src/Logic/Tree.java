@@ -104,8 +104,9 @@ public class Tree {
             }
         }
 
-        System.out.println("Chose " + moveChoice);
+
         rootNode = rootNode.getChild(diceRoll - 1).getChild(moveChoice);
+        System.out.println("Chose " + moveChoice + ", Move Weight: " + rootNode.getMoves().getWeight());
         rootNode.setParent(null);
 
         traverseAndAddLayer(rootNode);
@@ -134,6 +135,7 @@ public class Tree {
         }
 
         rootNode = rootNode.getChild(diceRoll - 1).getChild(moveChoice);
+        System.out.println("Indiv. move weight: " + rootNode.getMoves().getWeight());
         rootNode.setParent(null);
 
         traverseAndAddLayer(rootNode);

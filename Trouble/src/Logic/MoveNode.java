@@ -96,6 +96,10 @@ public class MoveNode {
         return this.moves.getStartPos();
     }
 
+    public Moves getMoves(){
+        return this.moves;
+    }
+
     public Pieces getColor(){
         return this.color;
     }

@@ -168,7 +168,11 @@ public class Board {
         str.append("\n");
         str.append("Green Home: ").append(greenHome).append(", Blue Home: ").append(blueHome).append(", Red Home: ").append(redHome).append(", Yellow Home: ").append(yellowHome);
         str.append("\n");
-        for(int i = 0; i < 28; i++){
+        for(int i = 0; i < 14; i++){
+            str.append("(").append(i).append(", ").append(toStringHelper(this.board[i])).append("), ");
+        }
+        str.append("\n");
+        for(int i = 14; i < 28; i++){
             str.append("(").append(i).append(", ").append(toStringHelper(this.board[i])).append("), ");
         }
         str.append("\n");
