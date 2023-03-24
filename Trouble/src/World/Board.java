@@ -117,8 +117,6 @@ public class Board {
             board[m.getEndPos()] = board[m.getStartPos()];
             board[m.getStartPos()] = Pieces.BLACK;
        }
-
-
     }
 
     public Pieces[] getBoard(){
@@ -196,6 +194,33 @@ public class Board {
 
     //TODO make a method to return indices of all pieces to help determine when there is no legal moves
     // and stop moving when there's no piece in the index
+
+    /**
+     *
+     * @param c piece color
+     * @return an array of indices that c's pieces are on (with duplicates, with home). returns -2 for pieces in end, -1 for
+     * pieces in home.
+     */
+    public int[] legalPieceIndices(Pieces c){
+        int[] indices = new int[4];
+        int counter = 0;
+
+        for(int i = getHome(c); i > 0; i-- ){
+            indices[counter++] = -1;
+        }
+
+        for(int i = 0; i < 28; i++){
+            if(board[i] == c){
+                indices[counter++] = i;
+            }
+        }
+
+        for(int i = getEnd(c); i > 0; i--){
+            indices[counter++] = -2;
+        }
+
+        return indices;
+    }
 
 
 }
