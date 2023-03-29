@@ -2,7 +2,7 @@ package Logic;
 
 import World.*;
 
-public class Moves {
+public class Moves implements Comparable<Moves> {
 
     private int weight;
     private final int roll;
@@ -11,6 +11,11 @@ public class Moves {
     private Board board;
     private int startPos;
     private int endPos;
+
+    public Moves(int weight){
+        this.weight = 0;
+        this.roll = 0;
+    }
 
     public Moves(Board b, int r, Pieces c){
         this.board = b;
@@ -24,118 +29,55 @@ public class Moves {
      * updates the weight of a move for a given piece based on a dice roll & the current board
      * @return
      */
+    //TODO killing someone from your own start doesnt put them back in home
+    //TODO stop illegal moves from playesr
     public void updateWeight(){
 
-        //assigns a negative weight to trying to leave the start when anything but a 6 is not rolled
-        if(!(inHome()) && roll == 6){
-
-            if(startPos < 0){
-                this.weight = 3;
-                return;
-            }
-
-            switch (roll) {
-                case 1:
-                    if(!isOccupied(this.board.getSP(this.colour) + 1)){
-                        this.weight = 4;
-                    }else if(isOccupied(this.startPos + 1)){
-                        this.weight = 2;
-                    }
-                    this.weight = 1;
-                    break;
-
-                case 2:
-                    if(!isOccupied(this.board.getSP(this.colour) + 2)){
-                        this.weight = 4;
-                    }else if(isOccupied(this.startPos + 2) ){
-                        this.weight = 2;
-                    }
-                    this.weight = 1;
-                    break;
-
-                case 3:
-                    if(!isOccupied(this.board.getSP(this.colour) + 3)){
-                        this.weight = 4;
-                    }else if(isOccupied(this.startPos + 3) ){
-                        this.weight = 2;
-                    }
-                    this.weight = 1;
-                    break;
-
-                case 4:
-                    if(!isOccupied(this.board.getSP(this.colour) + 4) && this.startPos + 4 == this.board.getEnd(colour)){
-
-                    }else if(!isOccupied(this.board.getSP(this.colour) + 4)){
-                        this.weight = 4;
-                    }else if(isOccupied(this.startPos + 4) ){
-                        this.weight = 2;
-                    }
-                    this.weight = 1;
-                    break;
-
-                case 5:
-                    if(!isOccupied(this.board.getSP(this.colour) + 5)){
-                        this.weight = 4;
-                    }else if(isOccupied(this.startPos + 5) ){
-                        this.weight = 2;
-                    }
-                    this.weight = 1;
-                    break;
-
-                case 6:
-                    if(!isOccupied(this.board.getSP(this.colour) + 6)){
-                        this.weight = 4;
-                    }else if(isOccupied(this.startPos + 6) ){
-                        this.weight = 2;
-                    }
-                    this.weight = 1;
-                    break;
-            }
-        }else{
-            this.weight = 3;
-
+        // If in home but do not have a 6
+        if ( startPos < 0 && roll != 6 ){
+            this.weight = -1;
+            return;
         }
 
-    }
+        //If in home and do have a 6
+        if ( startPos < 0 ){
+            this.weight = 3;
+            return;
+        }
 
-    /*
-    WEIGHT VALUES BASED ON POSSIBLE MOVES
-    5. GETTING TO END
-    4. CLEARING START TILE ?????
-    3. MOVING FROM HOME TO START TILE
-    2. KILLING AN OPPONENT
-    1. MOVE
-    Illegal moves will be assigned negative weights
-    */
 
-    public void updateIllegalWeight(){
-        if(this.roll != 6 && inHome())
+        // Going to Finish
+        if ( startPos < board.getSP(this.colour) &&
+                endPos >= board.getSP(this.colour) ){
+
+            this.weight = 5;
+            return;
+        }
+
+        // If moving from start tile
+        if( startPos == board.getSP(this.colour) ){
+            this.weight = 4;
+            return;
+        }
+
+
+        // If killing
+        if ( isOccupied(endPos) ){
+            this.weight = 2;
+            return;
+        }
+
+        // Landing on yourself
+        if ( boardstate[endPos] == this.colour ){
             this.weight = -1;
+            return;
+        }
 
-    }
-
-    // ~~~~~~~~~~~~~~ Additions I made to get this to work ~~~~~~~~~~~~~
-
-    public int getWeight(){
-        return weight;
-    }
-
-    public int getStartPos(){
-        return this.startPos;
-    }
-    public int getEndPos(){
-        return this.endPos;
-    }
-
-    public void setEndPos(int endPos) {
-        this.endPos = endPos;
-    }
-
-    public void setStartPos(int startPos){
-        this.startPos = startPos;
+        this.weight = 1;
     }
 
     public static Moves[] findMoves(Board b, int roll, Pieces c) {
+
         Moves[] array = new Moves[4];
         Pieces[] board = b.getBoard();
         int y = 0;
@@ -160,7 +102,7 @@ public class Moves {
         for (int i = 0; i < piecesInStart; i++){
             array[y] = new Moves(b, roll, c);
             array[y].setStartPos(z);
-            array[y].setEndPos(roll);
+            array[y].setEndPos(b.getSP(c));
             array[y].updateWeight();
             y++;
         }
@@ -169,20 +111,105 @@ public class Moves {
             if (board[x] == c) {
                 array[y] = new Moves(b, roll, c);
                 array[y].setStartPos(x);
-                array[y].setEndPos(x + roll % 28);
+                array[y].setEndPos( (x + roll) % 28);
                 array[y].updateWeight();
                 y++;
             }
         }
-        return array;
 
+        for (int j = y; j < 4; j++){
+            array[y] = new Moves(b, roll, c);
+            array[y].setStartPos(0);
+            array[y].setEndPos(0);
+            array[y].setWeight(-1);
+            y++;
+        }
+
+        return array;
     }
+
+
 
     public boolean inHome(){
         return(this.board.getSP(this.colour) == this.board.getHome(this.colour));
     }
 
+    /**
+     * @param i board index
+     * @return true if the board index does not contain your piece on it and does contain someone else's
+     * piece
+     */
     public boolean isOccupied(int i){
-        return(boardstate[i] != Pieces.BLACK);
+        return(boardstate[i % 28] != Pieces.BLACK && boardstate[i % 28] != this.colour);
     }
+
+
+
+
+    // ~~~~~ Setters and Getters ~~~~~
+
+    public int getWeight(){
+        return weight;
+    }
+
+    public void setWeight(int c){
+        this.weight = c;
+    }
+
+    public int getStartPos(){
+        return this.startPos;
+    }
+
+    public int getEndPos(){
+        return this.endPos;
+    }
+
+    public void setEndPos(int endPos) {
+        this.endPos = endPos;
+    }
+
+    public void setStartPos(int startPos){
+        this.startPos = startPos;
+    }
+
+
+
+
+    /**
+     * Compares this object with the specified object for order.  Returns a
+     * negative integer, zero, or a positive integer as this object is less
+     * than, equal to, or greater than the specified object.
+     *
+     * <p>The implementor must ensure {@link Integer#signum
+     * signum}{@code (x.compareTo(y)) == -signum(y.compareTo(x))} for
+     * all {@code x} and {@code y}.  (This implies that {@code
+     * x.compareTo(y)} must throw an exception if and only if {@code
+     * y.compareTo(x)} throws an exception.)
+     *
+     * <p>The implementor must also ensure that the relation is transitive:
+     * {@code (x.compareTo(y) > 0 && y.compareTo(z) > 0)} implies
+     * {@code x.compareTo(z) > 0}.
+     *
+     * <p>Finally, the implementor must ensure that {@code
+     * x.compareTo(y)==0} implies that {@code signum(x.compareTo(z))
+     * == signum(y.compareTo(z))}, for all {@code z}.
+     *
+     * @param o the object to be compared.
+     * @return a negative integer, zero, or a positive integer as this object
+     * is less than, equal to, or greater than the specified object.
+     * @throws NullPointerException if the specified object is null
+     * @throws ClassCastException   if the specified object's type prevents it
+     *                              from being compared to this object.
+     * @apiNote It is strongly recommended, but <i>not</i> strictly required that
+     * {@code (x.compareTo(y)==0) == (x.equals(y))}.  Generally speaking, any
+     * class that implements the {@code Comparable} interface and violates
+     * this condition should clearly indicate this fact.  The recommended
+     * language is "Note: this class has a natural ordering that is
+     * inconsistent with equals."
+     */
+    @Override
+    public int compareTo(Moves o) {
+        return this.weight - o.weight;
+    }
+
 }

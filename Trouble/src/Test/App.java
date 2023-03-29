@@ -4,49 +4,51 @@ import Logic.Tree;
 import World.Pieces;
 
 public class App {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
+        run();
+    }
+
+    public static void run() {
+
         Scanner scanner = new Scanner(System.in);
-        boolean gameState = false;
-        Tree tree = new Tree(4);
+        Tree tree = new Tree(3);
 
         Players green = new Players(false);
         Players blue = new Players(false);
         Players red = new Players(false);
         Players yellow = new Players(false);
 
-        System.out.println("Hello, World!");
+        System.out.println("\n~~~~~ Hello, Fellow Gamers! Looking to cause some Trouble??? ~~~~~\n");
         String answer = "temp";
 
         while(!answer.equals("y") && !answer.equals("n")) {
-            System.out.println("Do you want Green to be Player or AI? 'y' for Yes, 'n' for No.");
+            System.out.println("Do you want Green to be Player or AI? 'y' for Player, 'n' for AI.");
             answer = scanner.nextLine();
             if (answer.equals("y")) {
                 green.setHuman(true);
             } else if (answer.equals("n")) {
                 green.setHuman(false);
             } else {
-                System.out.println("not valid response.");
+                System.out.println("Not valid response, please try again.");
             }
         }
 
         answer = "temp";
-
         while(!answer.equals("y") && !answer.equals("n")) {
-            System.out.println("Do you want Blue to be Player or AI? 'y' for Yes, 'n' for No.");
+            System.out.println("Do you want Blue to be Player or AI? 'y' for Player, 'n' for AI.");
             answer = scanner.nextLine();
             if (answer.equals("y")) {
                 blue.setHuman(true);
             } else if (answer.equals("n")) {
                 blue.setHuman(false);
             } else {
-                System.out.println("not valid response.");
+                System.out.println("Not valid response, please try again.");
             }
         }
 
         answer = "temp";
-
         while(!answer.equals("y") && !answer.equals("n")){
-            System.out.println("Do you want Red to be Player or AI? 'y' for Yes, 'n' for No.");
+            System.out.println("Do you want Red to be Player or AI? 'y' for Player, 'n' for AI.");
             answer = scanner.nextLine();
             if (answer.equals("y")) {
                 red.setHuman(true);
@@ -54,7 +56,7 @@ public class App {
             } else if (answer.equals("n")) {
                 red.setHuman(false);
             } else {
-                System.out.println("not valid response.");
+                System.out.println("Not valid response, please try again.");
             }
         }
 
@@ -67,18 +69,16 @@ public class App {
             } else if (answer.equals("n")) {
                 yellow.setHuman(false);
             } else {
-                System.out.println("not valid response.");
+                System.out.println("Not valid response, please try again.");
             }
         }
 
-        gameState = true;
-
+        boolean gameState = true;
         while(gameState){
-            if(gameState){
-                green.makeMove(tree, green.rollDice());
-                if(tree.getRootNode().getBoard().getEnd(Pieces.GREEN) == 4){
-                    gameState = false;
-                }
+
+            green.makeMove(tree, green.rollDice());
+            if(tree.getRootNode().getBoard().getEnd(Pieces.GREEN) == 4){
+                gameState = false;
             }
 
             if(gameState){
@@ -101,10 +101,10 @@ public class App {
                     gameState = false;
                 }
             }
-
         }
 
     }
+
 
 
 
