@@ -1,4 +1,3 @@
-
 package World;
 import Logic.Moves;
 import java.util.Arrays;
@@ -291,30 +290,6 @@ public class Board {
 
         return str.toString();
 
-    }
-
-
-
-
-    public String oldtoString(){
-
-        StringBuilder str = new StringBuilder();
-
-        str.append("\n");
-        str.append("Green Home: ").append(greenHome).append(", Blue Home: ").append(blueHome).append(", Red Home: ").append(redHome).append(", Yellow Home: ").append(yellowHome);
-        str.append("\n");
-        for(int i = 0; i < 14; i++){
-            str.append("(").append(i).append(", ").append(toStringHelper(this.board[i])).append("), ");
-        }
-        str.append("\n");
-        for(int i = 14; i < 28; i++){
-            str.append("(").append(i).append(", ").append(toStringHelper(this.board[i])).append("), ");
-        }
-        str.append("\n");
-        str.append("Green End: ").append(greenEnd).append(", Blue End: ").append(blueEnd).append(", Red End: ").append(redEnd).append(", Yellow End: ").append(yellowEnd);
-        str.append("\n");
-
-        return str.toString();
     }
 
     public String toStringHelper(Pieces c){
