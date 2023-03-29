@@ -35,7 +35,7 @@ public class Moves implements Comparable<Moves> {
 
         // If in home but do not have a 6
         if ( startPos < 0 && roll != 6 ){
-            this.weight = -1;
+            this.weight = -100;
             return;
         }
 
@@ -69,7 +69,7 @@ public class Moves implements Comparable<Moves> {
 
         // Landing on yourself
         if ( boardstate[endPos] == this.colour ){
-            this.weight = -1;
+            this.weight = -100;
             return;
         }
 

@@ -28,7 +28,7 @@ public class Players {
             Moves[] possibleMoves = Moves.findMoves(tree.getRootNode().getBoard(), d, color);
             HashSet<Integer> legalMoveIndices = new HashSet<>();
             for (Moves moves : possibleMoves) {
-                if (moves.getWeight() != -1) {
+                if (moves.getWeight() != -100) {
                     legalMoveIndices.add(moves.getStartPos());
                 }
             }
