@@ -38,7 +38,6 @@ public class Players {
             String str;
             int num = 0;
             boolean goodValue;
-
             if (legalMoveIndices.size() > 0) { // If there are legal moves
                 do {
                     System.out.println("Legal moves: " + legalMoveIndices);
@@ -46,13 +45,18 @@ public class Players {
                     str = scanner.nextLine();
 
                     if (str.equals("home")) {
-                        goodValue = true;
-                        num = switch (color) {
-                            case GREEN -> -1;
-                            case BLUE -> -2;
-                            case RED -> -3;
-                            default -> -4;
-                        };
+                          num = switch (color) {
+                              case GREEN -> -1;
+                              case BLUE -> -2;
+                              case RED -> -3;
+                              default -> -4;
+                          };
+                          if(legalMoveIndices.contains(num)){
+                              goodValue = true;
+                          }else {
+                              goodValue = false;
+                          }
+
                     } else {
                         try {
                             num = Integer.parseInt(str);
