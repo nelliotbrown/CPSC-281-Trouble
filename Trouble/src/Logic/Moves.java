@@ -121,7 +121,7 @@ public class Moves implements Comparable<Moves> {
             array[y] = new Moves(b, roll, c);
             array[y].setStartPos(0);
             array[y].setEndPos(0);
-            array[y].setWeight(-1);
+            array[y].setWeight(-100);
             y++;
         }
 
