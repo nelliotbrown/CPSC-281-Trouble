@@ -46,15 +46,17 @@ public class DiceNode{
      */
     public void updateWeight(boolean isAdding) {
 
-        weight = children[0].getWeight();
+        int newWeight = children[0].getWeight();
 
         for (MoveNode child : children) {
             if (isAdding) {
-                weight = Math.max(weight, child.getWeight());
+                newWeight = Math.max(newWeight, child.getWeight());
             } else {
-                weight = Math.min(weight, child.getWeight());
+                newWeight = Math.min(newWeight, child.getWeight());
             }
         }
+
+        weight = newWeight;
     }
 
     /**
@@ -72,7 +74,6 @@ public class DiceNode{
         } else if (color == Pieces.YELLOW){
             return Pieces.GREEN;
         } else {
-            //TODO delete this after bug fixing
             System.out.println("THAT COLOR DOESN'T EXIST");
             return Pieces.BLACK;
         }
