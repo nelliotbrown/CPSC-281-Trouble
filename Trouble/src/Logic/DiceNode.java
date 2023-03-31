@@ -56,6 +56,7 @@ public class DiceNode{
             }
         }
 
+        weight = newWeight;
     }
 
     /**
@@ -73,11 +74,16 @@ public class DiceNode{
         } else if (color == Pieces.YELLOW){
             return Pieces.GREEN;
         } else {
-            //TODO delete this after bug fixing
             System.out.println("THAT COLOR DOESN'T EXIST");
             return Pieces.BLACK;
         }
     }
+
+    /**
+     * @param color color whose successor color will be returned
+     * @return The next color in the order of turns
+     */
+    
 
 
     // ~~~~~ Setters and Getters ~~~~~
