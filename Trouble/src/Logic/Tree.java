@@ -83,7 +83,6 @@ public class Tree {
             current.updateWeight( color == current.getColor() );//Update the move Node
         }
 
-//        System.out.print(current.getWeight());
     }
 
 
@@ -96,16 +95,20 @@ public class Tree {
     public void aiChooseMove(int diceRoll){
         int moveChoice = 0;
 
-        for(int i = 0; i < 4; i++){
-            System.out.println("Option " + i + ", weight: " + rootNode.getChild(diceRoll - 1).getChild(i).getWeight()
-                    + ", starting position: " + rootNode.getChild(diceRoll - 1).getChild(i).getMoveStartingPos() );
-
-            if(rootNode.getChild(diceRoll - 1).getChild(i).getWeight() >
-                    rootNode.getChild(diceRoll - 1).getChild(moveChoice).getWeight()){
+        for(int i = 1; i < 4; i++){
+            if( (rootNode.getChild(diceRoll - 1).getChild(i).getWeight() >
+                    rootNode.getChild(diceRoll - 1).getChild(moveChoice).getWeight() ) &&
+                    (rootNode.getChild(diceRoll - 1).getChild(i).getMoves().getWeight() != -100) ){
+                moveChoice = i;
+            } else if( (rootNode.getChild(diceRoll - 1).getChild(moveChoice).getMoves().getWeight() == -100) &&
+                    (rootNode.getChild(diceRoll - 1).getChild(i).getMoves().getWeight() != -100) ){
                 moveChoice = i;
             }
         }
 
+        if(moveChoice != 0 && rootNode.getChild(diceRoll - 1).getChild(moveChoice).getMoves().getWeight() == -100){
+            throw new RuntimeException("AMSKmAPLMASPL");
+        }
 
         rootNode = rootNode.getChild(diceRoll - 1).getChild(moveChoice);
         System.out.println("Chose " + moveChoice + ", Move Weight: " + rootNode.getMoves().getWeight());
@@ -125,17 +128,12 @@ public class Tree {
      */
     public void playerChooseMove(int diceRoll, int startPos, Pieces c) {
         int moveChoice = -1;
-        int fix = rootNode.getBoard().getEnd(c);
 
         for (int i = 0; i < 4; i++) {
             if (rootNode.getChild(diceRoll - 1).getChild(i).getMoveStartingPos() == startPos) {
                 moveChoice = i;
                 System.out.println(moveChoice);
             }
-        }
-
-        if(moveChoice == -1){
-            System.out.println("YOU IDIOT YOU COULDN'T MOVE THAT PIECE");
         }
 
         rootNode = rootNode.getChild(diceRoll - 1).getChild(moveChoice);

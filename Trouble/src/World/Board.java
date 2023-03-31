@@ -1,4 +1,3 @@
-
 package World;
 import Logic.Moves;
 import java.util.Arrays;
@@ -55,6 +54,7 @@ public class Board {
         if(m.getWeight() == 5){
             Pieces c = board[m.getStartPos()];
             board[m.getStartPos()] = Pieces.BLACK;
+
             if(c == Pieces.GREEN){
                 greenEnd++;
             }
@@ -96,7 +96,7 @@ public class Board {
                 blueHome--;
 
                 if(temp == Pieces.GREEN){
-                    blueHome++;
+                    greenHome++;
                 }
                 else if(temp == Pieces.RED){
                     redHome++;
@@ -115,7 +115,7 @@ public class Board {
                     blueHome++;
                 }
                 else if(temp == Pieces.GREEN){
-                    redHome++;
+                    greenHome++;
                 }
                 else if(temp == Pieces.YELLOW){
                     yellowHome++;
@@ -134,7 +134,7 @@ public class Board {
                     redHome++;
                 }
                 else if(temp == Pieces.GREEN){
-                    yellowHome++;
+                    greenHome++;
                 }
             }
         }
@@ -143,6 +143,7 @@ public class Board {
             Pieces temp = board[m.getEndPos()];
             board[m.getEndPos()] = board[m.getStartPos()];
             board[m.getStartPos()] = Pieces.BLACK;
+
             if(temp == Pieces.GREEN){
                 greenHome++;
             }
@@ -226,13 +227,13 @@ public class Board {
         str.append(" ".repeat(14)).append("HOME").append(" ".repeat(21)).append("END\n");
 
         //Yellow Home
-        str.append(" ".repeat(14));
+        str.append(" ".repeat(13));
         for(int i = 0; i < 4; i++){
-            str.append("[ ").append( yellowHome > i ? "Y" : " " ).append(" ]");
+            str.append("[ ").append( yellowHome > i ? toStringHelper(Pieces.YELLOW) : " " ).append(" ]");
         }
         str.append(" ".repeat(5));
         for(int i = 0; i < 4; i++){
-            str.append("[ ").append( yellowEnd > i ? "Y" : " " ).append(" ]");
+            str.append("[ ").append( yellowEnd > i ? toStringHelper(Pieces.YELLOW) : " " ).append(" ]");
         }
 
 
@@ -245,42 +246,42 @@ public class Board {
 
 
         // top row
-        str.append("H [ ").append( greenHome > 0 ? "G" : " " ).append(" ]").append(" ".repeat(11));
+        str.append("H [ ").append( greenHome > 0 ? toStringHelper(Pieces.GREEN) : " " ).append(" ]").append(" ".repeat(11));
         for(int i = 24; i >= 18; i--){
             str.append("[ ").append(toStringHelper(board[i])).append(" ]");
         }
-        str.append(" ".repeat(11)).append("[ ").append( redHome > 0 ? "R" : " " ).append(" ] H\n");
+        str.append(" ".repeat(11)).append("[ ").append( redHome > 0 ? toStringHelper(Pieces.RED) : " " ).append(" ] H\n");
 
 
         // middle rows
-        str.append("O [ ").append( greenHome > 1 ? "G" : " " ).append(" ]").append("   25 ").append("[ ").append(toStringHelper(board[25])).append(" ]").append(" ".repeat(35));
-        str.append("[ ").append(toStringHelper(board[17])).append(" ]").append(" 17   ").append("[ ").append( redHome > 1 ? "R" : " " ).append(" ] O\n");
+        str.append("O [ ").append( greenHome > 1 ? toStringHelper(Pieces.GREEN) : " " ).append(" ]").append("   25 ").append("[ ").append(toStringHelper(board[25])).append(" ]").append(" ".repeat(35));
+        str.append("[ ").append(toStringHelper(board[17])).append(" ]").append(" 17   ").append("[ ").append( redHome > 1 ? toStringHelper(Pieces.RED) : " " ).append(" ] O\n");
 
-        str.append("M [ ").append( greenHome > 2 ? "G" : " " ).append(" ]").append("   26 ").append("[ ").append(toStringHelper(board[26])).append(" ]").append(" ".repeat(35));
-        str.append("[ ").append(toStringHelper(board[16])).append(" ]").append(" 16   ").append("[ ").append( redHome > 2 ? "R" : " " ).append(" ] M\n");
+        str.append("M [ ").append( greenHome > 2 ? toStringHelper(Pieces.GREEN) : " " ).append(" ]").append("   26 ").append("[ ").append(toStringHelper(board[26])).append(" ]").append(" ".repeat(35));
+        str.append("[ ").append(toStringHelper(board[16])).append(" ]").append(" 16   ").append("[ ").append( redHome > 2 ? toStringHelper(Pieces.RED) : " " ).append(" ] M\n");
 
-        str.append("E [ ").append( greenHome > 3 ? "G" : " " ).append(" ]").append("   27 ").append("[ ").append(toStringHelper(board[27])).append(" ]").append(" ".repeat(35));
-        str.append("[ ").append(toStringHelper(board[15])).append(" ]").append(" 15   ").append("[ ").append( redHome > 3 ? "R" : " " ).append(" ] E\n");
+        str.append("E [ ").append( greenHome > 3 ? toStringHelper(Pieces.GREEN) : " " ).append(" ]").append("   27 ").append("[ ").append(toStringHelper(board[27])).append(" ]").append(" ".repeat(35));
+        str.append("[ ").append(toStringHelper(board[15])).append(" ]").append(" 15   ").append("[ ").append( redHome > 3 ? toStringHelper(Pieces.RED) : " " ).append(" ] E\n");
 
         str.append("       ").append("    0 ").append("[ ").append(toStringHelper(board[0])).append(" ]").append(" ".repeat(35));
         str.append("[ ").append(toStringHelper(board[14])).append(" ]").append(" 14   ").append("\n");
 
-        str.append("E [ ").append( greenEnd > 0 ? "G" : " " ).append(" ]").append("    1 ").append("[ ").append(toStringHelper(board[1])).append(" ]").append(" ".repeat(35));
-        str.append("[ ").append(toStringHelper(board[13])).append(" ]").append(" 13   ").append("[ ").append( redEnd > 0 ? "R" : " " ).append(" ] E\n");
+        str.append("E [ ").append( greenEnd > 0 ? toStringHelper(Pieces.GREEN) : " " ).append(" ]").append("    1 ").append("[ ").append(toStringHelper(board[1])).append(" ]").append(" ".repeat(35));
+        str.append("[ ").append(toStringHelper(board[13])).append(" ]").append(" 13   ").append("[ ").append( redEnd > 0 ? toStringHelper(Pieces.RED) : " " ).append(" ] E\n");
 
-        str.append("N [ ").append( greenEnd > 1 ? "G" : " " ).append(" ]").append("    2 ").append("[ ").append(toStringHelper(board[2])).append(" ]").append(" ".repeat(35));
-        str.append("[ ").append(toStringHelper(board[12])).append(" ]").append(" 12   ").append("[ ").append( redEnd > 1 ? "R" : " " ).append(" ] N\n");
+        str.append("N [ ").append( greenEnd > 1 ? toStringHelper(Pieces.GREEN) : " " ).append(" ]").append("    2 ").append("[ ").append(toStringHelper(board[2])).append(" ]").append(" ".repeat(35));
+        str.append("[ ").append(toStringHelper(board[12])).append(" ]").append(" 12   ").append("[ ").append( redEnd > 1 ? toStringHelper(Pieces.RED) : " " ).append(" ] N\n");
 
-        str.append("D [ ").append( greenEnd > 2 ? "G" : " " ).append(" ]").append("    3 ").append("[ ").append(toStringHelper(board[3])).append(" ]").append(" ".repeat(35));
-        str.append("[ ").append(toStringHelper(board[11])).append(" ]").append(" 11   ").append("[ ").append( redEnd > 2 ? "R" : " " ).append(" ] D\n");
+        str.append("D [ ").append( greenEnd > 2 ? toStringHelper(Pieces.GREEN) : " " ).append(" ]").append("    3 ").append("[ ").append(toStringHelper(board[3])).append(" ]").append(" ".repeat(35));
+        str.append("[ ").append(toStringHelper(board[11])).append(" ]").append(" 11   ").append("[ ").append( redEnd > 2 ? toStringHelper(Pieces.RED) : " " ).append(" ] D\n");
 
 
         // bottom row
-        str.append("  [ ").append( greenEnd > 3 ? "G" : " " ).append(" ]").append(" ".repeat(11));
+        str.append("  [ ").append( greenEnd > 3 ? toStringHelper(Pieces.GREEN) : " " ).append(" ]").append(" ".repeat(11));
         for(int i = 4; i <= 10; i++){
             str.append("[ ").append(toStringHelper(board[i])).append(" ]");
         }
-        str.append(" ".repeat(11)).append("[ ").append( redEnd > 3 ? "R" : " " ).append(" ]");
+        str.append(" ".repeat(11)).append("[ ").append( redEnd > 3 ? toStringHelper(Pieces.RED) : " " ).append(" ]");
 
 
         str.append("\n").append(" ".repeat(20));
@@ -292,13 +293,13 @@ public class Board {
 
         //Blue Home
         //Yellow Home
-        str.append(" ".repeat(14));
+        str.append(" ".repeat(13));
         for(int i = 0; i < 4; i++){
-            str.append("[ ").append( blueHome > i ? "B" : " " ).append(" ]");
+            str.append("[ ").append( blueHome > i ? toStringHelper(Pieces.BLUE) : " " ).append(" ]");
         }
         str.append(" ".repeat(5));
         for(int i = 0; i < 4; i++){
-            str.append("[ ").append( blueEnd > i ? "B" : " " ).append(" ]");
+            str.append("[ ").append( blueEnd > i ? toStringHelper(Pieces.BLUE) : " " ).append(" ]");
         }
 
         str.append("\n").append(" ".repeat(14)).append("HOME").append(" ".repeat(21)).append("END\n");
@@ -311,13 +312,13 @@ public class Board {
 
     public String toStringHelper(Pieces c){
         if(c == Pieces.GREEN){
-            return "G";
+            return "\u001B[32m" + "G" + "\u001B[0m";
         } else if(c == Pieces.BLUE){
-            return "B";
+            return "\u001B[34m" + "B" + "\u001B[0m";
         } else if(c == Pieces.YELLOW){
-            return "Y";
+            return "\u001B[33m" + "Y" + "\u001B[0m";
         } else if(c == Pieces.RED){
-            return "R";
+            return "\u001B[31m" + "R" + "\u001B[0m";
         } else {
             return " ";
         }
