@@ -90,7 +90,7 @@ public class Board {
                 }
             }
 
-           else if(m.getStartPos() == -2){
+            else if(m.getStartPos() == -2){
                 Pieces temp = board[blueSP];
                 board[blueSP] = Pieces.BLUE;
                 blueHome--;
@@ -106,7 +106,7 @@ public class Board {
                 }
             }
 
-           else if(m.getStartPos() == -3){
+            else if(m.getStartPos() == -3){
                 Pieces temp = board[redSP];
                 board[redSP] = Pieces.RED;
                 redHome--;
@@ -122,7 +122,7 @@ public class Board {
                 }
             }
 
-           else if(m.getStartPos() == -4){
+            else if(m.getStartPos() == -4){
                 Pieces temp = board[yellowSP];
                 board[yellowSP] = Pieces.YELLOW;
                 yellowHome--;
@@ -174,7 +174,7 @@ public class Board {
                 yellowHome++;
             }
 
-       }
+        }
     }
 
     public Pieces[] getBoard(){

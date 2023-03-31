@@ -83,6 +83,7 @@ public class Moves implements Comparable<Moves> {
 
     public static Moves[] findMoves(Board b, int roll, Pieces c) {
         b.pieceCount();
+
         Moves[] array = new Moves[4];
         Pieces[] board = b.getBoard();
         int y = 0;
@@ -105,11 +106,11 @@ public class Moves implements Comparable<Moves> {
         }
 
         for (int i = 0; i < piecesInStart; i++){
-                array[y] = new Moves(b, roll, c);
-                array[y].setStartPos(z);
-                array[y].setEndPos(b.getSP(c));
-                array[y].updateWeight();
-                y++;
+            array[y] = new Moves(b, roll, c);
+            array[y].setStartPos(z);
+            array[y].setEndPos(b.getSP(c));
+            array[y].updateWeight();
+            y++;
         }
 
         for (int x = 0; x < board.length; x++) {

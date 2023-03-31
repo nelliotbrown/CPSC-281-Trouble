@@ -98,7 +98,7 @@ public class Tree {
 
         for(int i = 0; i < 4; i++){
             System.out.println("Option " + i + ", weight: " + rootNode.getChild(diceRoll - 1).getChild(i).getWeight()
-            + ", starting position: " + rootNode.getChild(diceRoll - 1).getChild(i).getMoveStartingPos() );
+                    + ", starting position: " + rootNode.getChild(diceRoll - 1).getChild(i).getMoveStartingPos() );
 
             if(rootNode.getChild(diceRoll - 1).getChild(i).getWeight() >
                     rootNode.getChild(diceRoll - 1).getChild(moveChoice).getWeight()){
