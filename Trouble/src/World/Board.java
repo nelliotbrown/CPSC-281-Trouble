@@ -96,7 +96,7 @@ public class Board {
                 blueHome--;
 
                 if(temp == Pieces.GREEN){
-                    blueHome++;
+                    greenHome++;
                 }
                 else if(temp == Pieces.RED){
                     redHome++;
@@ -115,7 +115,7 @@ public class Board {
                     blueHome++;
                 }
                 else if(temp == Pieces.GREEN){
-                    redHome++;
+                    greenHome++;
                 }
                 else if(temp == Pieces.YELLOW){
                     yellowHome++;
@@ -134,7 +134,7 @@ public class Board {
                     redHome++;
                 }
                 else if(temp == Pieces.GREEN){
-                    yellowHome++;
+                    greenHome++;
                 }
             }
         }
