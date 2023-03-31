@@ -79,6 +79,12 @@ public class DiceNode{
         }
     }
 
+    /**
+     * @param color color whose successor color will be returned
+     * @return The next color in the order of turns
+     */
+    
+
 
     // ~~~~~ Setters and Getters ~~~~~
 
