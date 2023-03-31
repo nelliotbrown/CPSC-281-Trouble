@@ -158,8 +158,22 @@ public class Board {
         }
 
         else if(m.getWeight() == 4 || m.getWeight() == 1){
+            Pieces temp = board[m.getEndPos()];
             board[m.getEndPos()] = board[m.getStartPos()];
             board[m.getStartPos()] = Pieces.BLACK;
+            if(temp == Pieces.GREEN){
+                greenHome++;
+            }
+            else if(temp == Pieces.BLUE){
+                blueHome++;
+            }
+            else if(temp == Pieces.RED){
+                redHome++;
+            }
+            else if(temp == Pieces.YELLOW){
+                yellowHome++;
+            }
+
        }
     }
 
@@ -295,28 +309,6 @@ public class Board {
 
 
 
-
-    public String oldtoString(){
-
-        StringBuilder str = new StringBuilder();
-
-        str.append("\n");
-        str.append("Green Home: ").append(greenHome).append(", Blue Home: ").append(blueHome).append(", Red Home: ").append(redHome).append(", Yellow Home: ").append(yellowHome);
-        str.append("\n");
-        for(int i = 0; i < 14; i++){
-            str.append("(").append(i).append(", ").append(toStringHelper(this.board[i])).append("), ");
-        }
-        str.append("\n");
-        for(int i = 14; i < 28; i++){
-            str.append("(").append(i).append(", ").append(toStringHelper(this.board[i])).append("), ");
-        }
-        str.append("\n");
-        str.append("Green End: ").append(greenEnd).append(", Blue End: ").append(blueEnd).append(", Red End: ").append(redEnd).append(", Yellow End: ").append(yellowEnd);
-        str.append("\n");
-
-        return str.toString();
-    }
-
     public String toStringHelper(Pieces c){
         if(c == Pieces.GREEN){
             return "G";
@@ -356,6 +348,18 @@ public class Board {
         }
 
         return indices;
+    }
+
+    public void pieceCount(){
+        int total = greenEnd + blueEnd + redEnd + yellowEnd + greenHome + redHome + blueHome + yellowHome;
+        for(int x = 0; x < board.length;  x++){
+            if(board[x] != Pieces.BLACK){
+                total++;
+            }
+        }
+        if(total != 16){
+            System.out.println("Sean is not correct it works");
+        }
     }
 
 

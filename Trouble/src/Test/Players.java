@@ -80,10 +80,10 @@ public class Players {
             } else { // If there is no legal moves
                 num = possibleMoves[0].getStartPos();
                 System.out.println("No legal Moves !");
-                try{ Thread.sleep(1000); } catch ( Exception ignored ){}
+//                try{ Thread.sleep(1000); } catch ( Exception ignored ){}
             }
 
-            tree.playerChooseMove(d, num);
+            tree.playerChooseMove(d, num, color);
         } else {
 
             Pieces color = DiceNode.nextColor(tree.getRootNode().getColor());
@@ -91,7 +91,7 @@ public class Players {
             System.out.println(tree.getRootNode().getBoard());
             tree.aiChooseMove(d);
 
-            try{ Thread.sleep(1000); } catch ( Exception ignored ){}
+//            try{ Thread.sleep(1000); } catch ( Exception ignored ){}
 
         }
 
