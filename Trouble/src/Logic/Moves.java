@@ -34,13 +34,19 @@ public class Moves implements Comparable<Moves> {
     public void updateWeight(){
 
         // If in home but do not have a 6
-        if ( startPos < 0 && roll != 6 ){
+        if (startPos < 0 && roll != 6 ){
             this.weight = -100;
             return;
         }
 
-        //If in home and do have a 6
-        if ( startPos < 0 ){
+        //If in home and do have a 6 but will land on yo self
+        if (startPos < 0 && boardstate[(this.board.getSP(this.colour))] == this.colour){
+            this.weight = -100;
+            return;
+        }
+
+        //If you're clear to land in the starting position
+        if (startPos < 0){
             this.weight = 3;
             return;
         }
@@ -48,8 +54,7 @@ public class Moves implements Comparable<Moves> {
 
         // Going to Finish
         if ( startPos < board.getSP(this.colour) &&
-                endPos >= board.getSP(this.colour) ){
-
+                endPos >= board.getSP(this.colour) || this.colour == Pieces.GREEN && startPos + roll > 27){
             this.weight = 5;
             return;
         }
@@ -77,7 +82,7 @@ public class Moves implements Comparable<Moves> {
     }
 
     public static Moves[] findMoves(Board b, int roll, Pieces c) {
-
+        b.pieceCount();
         Moves[] array = new Moves[4];
         Pieces[] board = b.getBoard();
         int y = 0;
@@ -100,11 +105,11 @@ public class Moves implements Comparable<Moves> {
         }
 
         for (int i = 0; i < piecesInStart; i++){
-            array[y] = new Moves(b, roll, c);
-            array[y].setStartPos(z);
-            array[y].setEndPos(b.getSP(c));
-            array[y].updateWeight();
-            y++;
+                array[y] = new Moves(b, roll, c);
+                array[y].setStartPos(z);
+                array[y].setEndPos(b.getSP(c));
+                array[y].updateWeight();
+                y++;
         }
 
         for (int x = 0; x < board.length; x++) {
@@ -119,8 +124,8 @@ public class Moves implements Comparable<Moves> {
 
         for (int j = y; j < 4; j++){
             array[y] = new Moves(b, roll, c);
-            array[y].setStartPos(0);
-            array[y].setEndPos(0);
+            array[y].setStartPos(-90);
+            array[y].setEndPos(-90);
             array[y].setWeight(-100);
             y++;
         }

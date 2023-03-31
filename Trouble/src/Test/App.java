@@ -78,12 +78,14 @@ public class App {
 
             green.makeMove(tree, green.rollDice());
             if(tree.getRootNode().getBoard().getEnd(Pieces.GREEN) == 4){
+                System.out.println("GREEN WINS");
                 gameState = false;
             }
 
             if(gameState){
                 blue.makeMove(tree, blue.rollDice());
                 if(tree.getRootNode().getBoard().getEnd(Pieces.BLUE) == 4){
+                    System.out.println("BLUE WINS");
                     gameState = false;
                 }
             }
@@ -91,6 +93,7 @@ public class App {
             if(gameState){
                 red.makeMove(tree, red.rollDice());
                 if(tree.getRootNode().getBoard().getEnd(Pieces.RED) == 4){
+                    System.out.println("RED WINS");
                     gameState = false;
                 }
             }
@@ -98,6 +101,7 @@ public class App {
             if(gameState){
                 yellow.makeMove(tree, yellow.rollDice());
                 if(tree.getRootNode().getBoard().getEnd(Pieces.YELLOW) == 4){
+                    System.out.println("YELLOW WINS");
                     gameState = false;
                 }
             }

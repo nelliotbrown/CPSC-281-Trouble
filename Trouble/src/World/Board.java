@@ -1,3 +1,4 @@
+
 package World;
 import Logic.Moves;
 import java.util.Arrays;
@@ -157,8 +158,22 @@ public class Board {
         }
 
         else if(m.getWeight() == 4 || m.getWeight() == 1){
+            Pieces temp = board[m.getEndPos()];
             board[m.getEndPos()] = board[m.getStartPos()];
             board[m.getStartPos()] = Pieces.BLACK;
+            if(temp == Pieces.GREEN){
+                greenHome++;
+            }
+            else if(temp == Pieces.BLUE){
+                blueHome++;
+            }
+            else if(temp == Pieces.RED){
+                redHome++;
+            }
+            else if(temp == Pieces.YELLOW){
+                yellowHome++;
+            }
+
        }
     }
 
@@ -292,6 +307,8 @@ public class Board {
 
     }
 
+
+
     public String toStringHelper(Pieces c){
         if(c == Pieces.GREEN){
             return "G";
@@ -331,6 +348,18 @@ public class Board {
         }
 
         return indices;
+    }
+
+    public void pieceCount(){
+        int total = greenEnd + blueEnd + redEnd + yellowEnd + greenHome + redHome + blueHome + yellowHome;
+        for(int x = 0; x < board.length;  x++){
+            if(board[x] != Pieces.BLACK){
+                total++;
+            }
+        }
+        if(total != 16){
+            System.out.println("Sean is not correct it works");
+        }
     }
 
 

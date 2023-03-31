@@ -123,12 +123,14 @@ public class Tree {
      * @param diceRoll dice roll for the turn
      * @param startPos starting position of piece that will be moved
      */
-    public void playerChooseMove(int diceRoll, int startPos) {
+    public void playerChooseMove(int diceRoll, int startPos, Pieces c) {
         int moveChoice = -1;
+        int fix = rootNode.getBoard().getEnd(c);
 
         for (int i = 0; i < 4; i++) {
             if (rootNode.getChild(diceRoll - 1).getChild(i).getMoveStartingPos() == startPos) {
                 moveChoice = i;
+                System.out.println(moveChoice);
             }
         }
 
