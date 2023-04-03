@@ -62,7 +62,7 @@ public class Moves implements Comparable<Moves> {
         }
 
         // If moving from start tile
-        if( startPos == board.getSP(this.colour) ){
+        if( startPos == board.getSP(this.colour) && board.getBoard()[endPos] != this.colour){
             this.weight = 4;
             return;
         }
