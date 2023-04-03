@@ -45,17 +45,14 @@ public class Players {
                     str = scanner.nextLine();
 
                     if (str.equals("home")) {
-                          num = switch (color) {
-                              case GREEN -> -1;
-                              case BLUE -> -2;
-                              case RED -> -3;
-                              default -> -4;
-                          };
-                          if(legalMoveIndices.contains(num)){
-                              goodValue = true;
-                          }else {
-                              goodValue = false;
-                          }
+                        num = switch (color) {
+                            case GREEN -> -1;
+                            case BLUE -> -2;
+                            case RED -> -3;
+                            default -> -4;
+                        };
+
+                        goodValue = legalMoveIndices.contains(num);
 
                     } else {
                         try {

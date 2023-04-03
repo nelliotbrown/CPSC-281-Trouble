@@ -2,6 +2,8 @@ package Logic;
 
 import World.*;
 
+import java.util.Arrays;
+
 public class Moves implements Comparable<Moves> {
 
     private int weight;
@@ -83,6 +85,7 @@ public class Moves implements Comparable<Moves> {
 
     public static Moves[] findMoves(Board b, int roll, Pieces c) {
         b.pieceCount();
+
         Moves[] array = new Moves[4];
         Pieces[] board = b.getBoard();
         int y = 0;
@@ -104,25 +107,25 @@ public class Moves implements Comparable<Moves> {
                 break;
         }
 
-        for (int i = 0; i < piecesInStart; i++){
-                array[y] = new Moves(b, roll, c);
-                array[y].setStartPos(z);
-                array[y].setEndPos(b.getSP(c));
-                array[y].updateWeight();
-                y++;
+        for (int i = 0; i < piecesInStart; i++) {
+            array[y] = new Moves(b, roll, c);
+            array[y].setStartPos(z);
+            array[y].setEndPos(b.getSP(c));
+            array[y].updateWeight();
+            y++;
         }
 
         for (int x = 0; x < board.length; x++) {
             if (board[x] == c) {
                 array[y] = new Moves(b, roll, c);
                 array[y].setStartPos(x);
-                array[y].setEndPos( (x + roll) % 28);
+                array[y].setEndPos((x + roll) % 28);
                 array[y].updateWeight();
                 y++;
             }
         }
 
-        for (int j = y; j < 4; j++){
+        for (int j = y; j < 4; j++) {
             array[y] = new Moves(b, roll, c);
             array[y].setStartPos(-90);
             array[y].setEndPos(-90);
@@ -133,11 +136,6 @@ public class Moves implements Comparable<Moves> {
         return array;
     }
 
-
-
-    public boolean inHome(){
-        return(this.board.getSP(this.colour) == this.board.getHome(this.colour));
-    }
 
     /**
      * @param i board index
