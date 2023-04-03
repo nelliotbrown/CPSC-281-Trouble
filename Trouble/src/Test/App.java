@@ -79,7 +79,7 @@ public class App {
             green.makeMove(tree, green.rollDice());
             if(tree.getRootNode().getBoard().getEnd(Pieces.GREEN) == 4){
                 System.out.println("\n\n ~~~~ GREEN WINS ~~~~ \n\n");
-                System.out.println(tree.getRootNode());
+                System.out.println(tree.getRootNode().getBoard());
                 gameState = false;
             }
 
@@ -87,7 +87,7 @@ public class App {
                 blue.makeMove(tree, blue.rollDice());
                 if(tree.getRootNode().getBoard().getEnd(Pieces.BLUE) == 4){
                     System.out.println("\n\n ~~~~ BLUE WINS ~~~~ \n\n");
-                    System.out.println(tree.getRootNode());
+                    System.out.println(tree.getRootNode().getBoard());
                     gameState = false;
                 }
             }
@@ -96,7 +96,7 @@ public class App {
                 red.makeMove(tree, red.rollDice());
                 if(tree.getRootNode().getBoard().getEnd(Pieces.RED) == 4){
                     System.out.println("\n\n ~~~~ RED WINS ~~~~ \n\n");
-                    System.out.println(tree.getRootNode());
+                    System.out.println(tree.getRootNode().getBoard());
                     gameState = false;
                 }
             }
@@ -105,7 +105,7 @@ public class App {
                 yellow.makeMove(tree, yellow.rollDice());
                 if(tree.getRootNode().getBoard().getEnd(Pieces.YELLOW) == 4){
                     System.out.println("\n\n ~~~~ YELLOW WINS ~~~~ \n\n");
-                    System.out.println(tree.getRootNode());
+                    System.out.println(tree.getRootNode().getBoard());
                     gameState = false;
                 }
             }
