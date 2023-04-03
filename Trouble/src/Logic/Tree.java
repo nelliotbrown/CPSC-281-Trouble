@@ -106,12 +106,8 @@ public class Tree {
             }
         }
 
-        if(moveChoice != 0 && rootNode.getChild(diceRoll - 1).getChild(moveChoice).getMoves().getWeight() == -100){
-            throw new RuntimeException("AMSKmAPLMASPL");
-        }
 
         rootNode = rootNode.getChild(diceRoll - 1).getChild(moveChoice);
-        System.out.println("Chose " + moveChoice + ", Move Weight: " + rootNode.getMoves().getWeight());
         rootNode.setParent(null);
 
         traverseAndAddLayer(rootNode);
@@ -132,12 +128,10 @@ public class Tree {
         for (int i = 0; i < 4; i++) {
             if (rootNode.getChild(diceRoll - 1).getChild(i).getMoveStartingPos() == startPos) {
                 moveChoice = i;
-                System.out.println(moveChoice);
             }
         }
 
         rootNode = rootNode.getChild(diceRoll - 1).getChild(moveChoice);
-        System.out.println("Indiv. move weight: " + rootNode.getMoves().getWeight());
         rootNode.setParent(null);
 
         traverseAndAddLayer(rootNode);

@@ -15,14 +15,12 @@ public class Players {
         this.isHuman = isHuman;
     }
 
-    //TODO: stop letting humans attempt to move piece from home when there's other legal options
     public void makeMove(Tree tree, int d){
 
         if(isHuman) {
             Pieces color = DiceNode.nextColor(tree.getRootNode().getColor());
             System.out.println("\n" + color + " rolled: " + d);
             System.out.println(tree.getRootNode().getBoard());
-            System.out.println("Pieces on: " + Arrays.toString(tree.getRootNode().getBoard().legalPieceIndices(color)));
 
             // Find legal moves
             Moves[] possibleMoves = Moves.findMoves(tree.getRootNode().getBoard(), d, color);
@@ -40,8 +38,13 @@ public class Players {
             boolean goodValue;
             if (legalMoveIndices.size() > 0) { // If there are legal moves
                 do {
-                    System.out.println("Legal moves: " + legalMoveIndices);
-                    System.out.println("Where do you want to move from ? Type 'home' to move from your Home or the index of one of your pieces.");
+                    String legalStr = legalMoveIndices.toString();
+                    legalStr = legalStr.replace("-1", "home");
+                    legalStr = legalStr.replace("-2", "home");
+                    legalStr = legalStr.replace("-3", "home");
+                    legalStr = legalStr.replace("-4", "home");
+                    System.out.println("Legal moves: " + legalStr);
+                    System.out.println("Where do you want to move from ? Type 'home' to move from your Home, or the index of one of your pieces.");
                     str = scanner.nextLine();
 
                     if (str.equals("home")) {
@@ -77,7 +80,7 @@ public class Players {
             } else { // If there is no legal moves
                 num = possibleMoves[0].getStartPos();
                 System.out.println("No legal Moves !");
-//                try{ Thread.sleep(1000); } catch ( Exception ignored ){}
+                try{ Thread.sleep(2000); } catch ( Exception ignored ){}
             }
 
             tree.playerChooseMove(d, num, color);
@@ -88,7 +91,7 @@ public class Players {
             System.out.println(tree.getRootNode().getBoard());
             tree.aiChooseMove(d);
 
-//            try{ Thread.sleep(1000); } catch ( Exception ignored ){}
+            try{ Thread.sleep(1000); } catch ( Exception ignored ){}
 
         }
 
